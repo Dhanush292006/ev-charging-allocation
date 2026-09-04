@@ -241,6 +241,7 @@ def fetch_stations(latitude, longitude, search_radius_km):
 def add_road_data(stations, latitude, longitude):
     enriched = []
     for station in stations[:12]:
+        route_found = False
         for routing_url in ROUTING_URLS:
             try:
                 route = api_get(
@@ -256,9 +257,16 @@ def add_road_data(stations, latitude, longitude):
                         "eta": max(1, round(route_data["duration"] / 60)),
                     }
                 )
+                route_found = True
                 break
             except requests.RequestException:
                 continue
+        if not route_found:
+            distance = math.hypot(
+                (station["lat"] - latitude) * 111,
+                (station["lon"] - longitude) * 111 * math.cos(math.radians(latitude)),
+            )
+            enriched.append({**station, "distance": distance, "eta": None, "distance_type": "Straight-line"})
     return enriched
 
 
@@ -267,13 +275,16 @@ def score_stations(stations, battery_level, arrival_window):
         return []
     urgency = max(0, min(1, (55 - battery_level) / 35))
     max_distance = max(station["distance"] for station in stations) or 1
-    max_eta = max(station["eta"] for station in stations) or 1
+    routed_stations = [station for station in stations if station["eta"] is not None]
+    max_eta = max((station["eta"] for station in routed_stations), default=1)
     ranked = []
     for station in stations:
         availability = min(station["capacity"], 10) / 10 if station["capacity"] else 0.5
         distance_score = 1 - station["distance"] / max_distance
-        eta_score = 1 - station["eta"] / max_eta
-        if arrival_window == "Emergency":
+        eta_score = 1 - station["eta"] / max_eta if station["eta"] is not None else 0
+        if not routed_stations:
+            score = 0.6 * availability + 0.25 * distance_score + 0.15 * urgency
+        elif arrival_window == "Emergency":
             score = 0.15 * availability + 0.35 * distance_score + 0.35 * eta_score + 0.15 * urgency
         else:
             score = 0.3 * availability + 0.3 * distance_score + 0.2 * eta_score + 0.2 * urgency
@@ -357,6 +368,7 @@ summary[2].metric("Search radius", f"{search_radius_km} km")
 
 st.markdown("<div class='eyebrow'>03 / RECOMMENDED ALLOCATION</div>", unsafe_allow_html=True)
 st.header("Stations near your route")
+st.caption("Ranked by charger availability, distance, travel time, and battery urgency. If road routing is unavailable, distance means straight-line distance and ETA is omitted.")
 if not ranked_stations:
     if "ranked_stations" in st.session_state:
         st.warning("No verified live station routes are available right now. Try again later when the map services respond.")
@@ -371,9 +383,10 @@ else:
             unsafe_allow_html=True,
         )
         details = st.columns(5)
-        details[0].metric("Road distance", f"{station['distance']:.1f} km")
+        distance_label = f"{station.get('distance_type', 'Road')} distance"
+        details[0].metric(distance_label, f"{station['distance']:.1f} km")
         details[1].metric("Capacity", f"{station['capacity']} connectors" if station["capacity"] else "Not listed")
-        details[2].metric("Travel time", f"{station['eta']} min")
+        details[2].metric("Travel time", f"{station['eta']} min" if station["eta"] is not None else "Unavailable")
         details[3].metric("Score", f"{station['score'] * 100:.1f}")
         if details[4].button("Reserve this" if index == 0 else "Reserve", key=f"reserve-{station['id']}"):
             token = reservation_token(st.session_state["vehicle_id"], station["id"])
@@ -388,7 +401,7 @@ if reservation:
         [{
             "Reservation token": reservation["token"],
             "One-time code": reservation["otp"],
-            "Arrive by": f"{station['eta']} min from now",
+            "Arrive by": f"{station['eta']} min from now" if station["eta"] is not None else "Road ETA unavailable",
             "Mobile delivery": st.session_state["mobile_number"],
         }]
     )
