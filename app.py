@@ -23,18 +23,31 @@ ROUTING_URLS = [
 ]
 EV_MODELS = [
     "Ather 450X",
+    "Ather 450S",
+    "Ather 450 Apex",
     "Ather Rizta",
     "Bajaj Chetak",
+    "Bajaj Chetak 35 Series",
     "TVS iQube",
+    "TVS X",
     "Ola S1 Pro",
+    "Ola S1 Air",
+    "Ola S1 X",
     "Hero Vida V2",
+    "Hero Vida V1",
     "Revolt RV400",
+    "Simple One",
+    "Oben Rorr",
+    "Matter Aera",
     "Ultraviolette F77",
     "Tata Tiago EV",
     "Tata Tigor EV",
     "Tata Punch EV",
     "Tata Nexon EV",
     "Tata Curvv EV",
+    "Citroen eC3",
+    "Citroen eC3 Aircross",
+    "Maruti Suzuki e Vitara",
     "Mahindra XUV400 EV",
     "Mahindra BE 6",
     "Mahindra XEV 9e",
@@ -42,15 +55,23 @@ EV_MODELS = [
     "Hyundai Creta Electric",
     "Hyundai Ioniq 5",
     "Kia EV6",
+    "Kia EV9",
     "MG Comet EV",
     "MG ZS EV",
     "MG Windsor EV",
     "BYD Atto 3",
     "BYD Seal",
+    "BYD Sealion 7",
     "BMW i4",
     "BMW iX",
     "Mercedes-Benz EQB",
     "Volvo XC40 Recharge",
+    "Volvo C40 Recharge",
+    "Audi Q4 e-tron",
+    "Audi e-tron GT",
+    "Jaguar I-Pace",
+    "Porsche Taycan",
+    "Nissan Leaf",
     "Other / custom model",
 ]
 
@@ -290,6 +311,8 @@ with st.container(border=True):
         vehicle_model = st.selectbox("Vehicle model", EV_MODELS)
     with first_row[2]:
         mobile_number = st.text_input("Mobile number", placeholder="+91 98765 43210")
+    if vehicle_model == "Other / custom model":
+        vehicle_model = st.text_input("Custom EV model", placeholder="Enter make and model")
 
     second_row = st.columns(3)
     with second_row[0]:
