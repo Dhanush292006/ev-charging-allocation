@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChargeFlow | EV allocation command center</title>
+  <meta name="description" content="Rule-based EV charging station allocation and navigation prototype." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">+</span><span>charge<span class="brand-accent">flow</span></span></div>
+      <div class="sidebar-label">Workspace</div>
+      <nav class="nav-list" aria-label="Primary navigation">
+        <button class="nav-item active" data-view="allocation"><span class="nav-icon">⌁</span>Allocation <span class="nav-count">1</span></button>
+        <button class="nav-item" data-view="stations"><span class="nav-icon">◫</span>Stations</button>
+        <button class="nav-item" data-view="activity"><span class="nav-icon">◷</span>Activity</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="system-status"><span class="status-dot"></span><div><strong>System operational</strong><small>Last sync 14 sec ago</small></div></div>
+        <button class="user-chip"><span class="avatar">DS</span><span><strong>Dhanush S.</strong><small>Fleet operator</small></span><span class="chevron">⌄</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><p class="eyebrow">THURSDAY, 03 SEPTEMBER 2026</p><h1>Allocation command center</h1></div>
+        <div class="topbar-actions"><span class="live-pill"><span class="pulse"></span>Live network</span><button class="icon-button" aria-label="Notifications">♢<span class="notification-dot"></span></button></div>
+      </header>
+
+      <section id="allocation-view" class="view active-view">
+        <div class="overview-row">
+          <div><p class="section-kicker">AUTOMATED WORKFLOW</p><h2>Find the right charger,<br /><em>before you need it.</em></h2></div>
+          <div class="model-note"><span class="spark-icon">✦</span><div><strong>Rule-based allocation</strong><span>Availability · distance · ETA · urgency</span></div></div>
+        </div>
+
+        <div class="workspace-grid">
+          <section class="panel request-panel">
+            <div class="panel-heading"><div><span class="step-label">01 / VEHICLE REQUEST</span><h3>Tell us about the trip</h3></div><span class="secure-label">⌁ Secure input</span></div>
+            <form id="allocation-form">
+              <div class="field-grid">
+                <label>Vehicle ID<input id="vehicle-id" type="text" value="TN 09 EV 2471" required /></label>
+                <label>Vehicle model<select id="vehicle-model"><option value="sedan">Ather 450X</option><option value="suv">Tata Nexon EV</option><option value="premium">Hyundai Ioniq 5</option></select></label>
+                <label>Mobile number<input id="mobile-number" type="tel" inputmode="tel" pattern="[+0-9 ()-]{10,}" placeholder="+91 98765 43210" required /></label>
+              </div>
+              <div class="battery-input-row"><label>Current battery</label><div class="battery-control"><input id="battery" type="range" min="5" max="100" value="24" /><output id="battery-output">24%</output></div></div>
+              <div class="location-box"><div class="location-pin">⌖</div><div><span class="field-caption">CURRENT LOCATION</span><strong id="location-name">Location needed</strong><small id="location-status">Allow GPS access to find nearby stations</small></div><button type="button" class="change-location" id="change-location">Locate</button></div>
+              <div class="destination-row"><label>Destination (optional)<input id="destination" type="text" placeholder="e.g. Chennai Airport" /></label><label>Arrival window<select id="arrival-window"><option>ASAP</option><option>Within 30 minutes</option><option>Within 1 hour</option><option>Emergency</option></select></label></div>
+              <button class="primary-button" type="submit"><span>Allocate best station</span><span class="button-arrow">→</span></button>
+            </form>
+          </section>
+
+          <section class="panel network-panel">
+            <div class="panel-heading"><div><span class="step-label">02 / NETWORK PULSE</span><h3>Charger availability</h3></div><button class="refresh-button" id="refresh-data">↻ Refresh</button></div>
+            <div class="network-stat"><strong id="station-count">--</strong><span>stations found<br /><b id="network-area">near your location</b></span><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="network-rows"><div><span class="legend blue"></span><span>Stations with charger data</span><strong id="charger-data-count">--</strong></div><div><span class="legend orange"></span><span>Search radius</span><strong>15 km</strong></div></div>
+            <div class="network-footer"><span class="status-dot"></span><span id="network-status">Connecting to live map data...</span></div>
+          </section>
+        </div>
+
+        <section class="results-section" id="results-section">
+          <div class="results-header"><div><p class="section-kicker">03 / RECOMMENDED ALLOCATION</p><h2>Stations near your route</h2></div><div class="weight-summary"><span>Scoring weights</span><b>A 30%</b><b>D 30%</b><b>ETA 20%</b><b>U 20%</b></div></div>
+          <div id="station-list" class="station-list"></div>
+        </section>
+      </section>
+
+      <section id="stations-view" class="view"><div class="empty-view"><span class="empty-icon">◫</span><p class="section-kicker">NETWORK DIRECTORY</p><h2>Station operations</h2><p>Live connector inventory will appear here as your network grows.</p></div></section>
+      <section id="activity-view" class="view"><div class="empty-view"><span class="empty-icon">◷</span><p class="section-kicker">AUDIT TRAIL</p><h2>Recent activity</h2><p>Reservations, reroutes, and arrival events will be tracked here.</p></div></section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="reservation-modal" aria-hidden="true"><div class="modal"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div class="success-mark">✓</div><p class="section-kicker">RESERVATION CONFIRMED</p><h2 id="modal-title">Charger reserved.</h2><p class="modal-copy">Your station has been notified and a connector is being held for your arrival.</p><div class="reservation-ticket"><div><span>RESERVATION TOKEN</span><strong id="reservation-token">CF-2471-A8Q2</strong></div><div><span>ARRIVE BY</span><strong id="modal-eta">10:24 AM</strong></div><div><span>ONE-TIME CODE</span><strong id="reservation-otp">------</strong></div><div><span>MOBILE DELIVERY</span><strong id="sms-status">Ready</strong></div></div><div class="modal-actions"><button class="secondary-button" id="print-receipt">Print receipt</button><button class="secondary-button" id="send-sms">Share receipt</button></div><button class="primary-button" id="modal-done">Start navigation <span class="button-arrow">→</span></button></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
