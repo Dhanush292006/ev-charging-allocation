@@ -101,14 +101,17 @@ st.markdown(
 
 
 def api_get(url, params=None):
-    response = requests.get(url, params=params, timeout=20)
+    response = requests.get(
+        url,
+        params=params,
+        headers={"User-Agent": "ChargeFlow EV Allocation/1.0"},
+        timeout=20,
+    )
     response.raise_for_status()
     return response.json()
 
 
 def fetch_photon_stations(latitude, longitude, search_radius_km):
-    delta_latitude = search_radius_km / 111
-    delta_longitude = search_radius_km / (111 * max(math.cos(math.radians(latitude)), 0.2))
     photon_data = api_get(
         PHOTON_URL,
         {
@@ -116,7 +119,6 @@ def fetch_photon_stations(latitude, longitude, search_radius_km):
             "lat": latitude,
             "lon": longitude,
             "limit": 50,
-            "bbox": f"{longitude - delta_longitude},{latitude - delta_latitude},{longitude + delta_longitude},{latitude + delta_latitude}",
         },
     )
     stations = []
