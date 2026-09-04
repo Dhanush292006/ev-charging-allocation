@@ -21,6 +21,38 @@ ROUTING_URLS = [
     OSRM_URL,
     "https://routing.openstreetmap.de/routed-car/route/v1/driving",
 ]
+EV_MODELS = [
+    "Ather 450X",
+    "Ather Rizta",
+    "Bajaj Chetak",
+    "TVS iQube",
+    "Ola S1 Pro",
+    "Hero Vida V2",
+    "Revolt RV400",
+    "Ultraviolette F77",
+    "Tata Tiago EV",
+    "Tata Tigor EV",
+    "Tata Punch EV",
+    "Tata Nexon EV",
+    "Tata Curvv EV",
+    "Mahindra XUV400 EV",
+    "Mahindra BE 6",
+    "Mahindra XEV 9e",
+    "Hyundai Kona Electric",
+    "Hyundai Creta Electric",
+    "Hyundai Ioniq 5",
+    "Kia EV6",
+    "MG Comet EV",
+    "MG ZS EV",
+    "MG Windsor EV",
+    "BYD Atto 3",
+    "BYD Seal",
+    "BMW i4",
+    "BMW iX",
+    "Mercedes-Benz EQB",
+    "Volvo XC40 Recharge",
+    "Other / custom model",
+]
 
 st.set_page_config(page_title="ChargeFlow", page_icon="⚡", layout="wide")
 
@@ -255,7 +287,7 @@ with st.container(border=True):
     with first_row[0]:
         vehicle_id = st.text_input("Vehicle ID", "TN 09 EV 2471")
     with first_row[1]:
-        vehicle_model = st.selectbox("Vehicle model", ["Ather 450X", "Tata Nexon EV", "Hyundai Ioniq 5"])
+        vehicle_model = st.selectbox("Vehicle model", EV_MODELS)
     with first_row[2]:
         mobile_number = st.text_input("Mobile number", placeholder="+91 98765 43210")
 
