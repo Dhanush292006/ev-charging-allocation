@@ -1,4 +1,5 @@
 import hashlib
+import math
 import secrets
 from datetime import datetime
 
@@ -14,6 +15,7 @@ OVERPASS_FALLBACK_URLS = [
     "https://overpass.kumi.systems/api/interpreter",
     "https://overpass.private.coffee/api/interpreter",
 ]
+PHOTON_URL = "https://photon.komoot.io/api/"
 OSRM_URL = "https://router.project-osrm.org/route/v1/driving"
 ROUTING_URLS = [
     OSRM_URL,
@@ -140,7 +142,47 @@ def fetch_stations(latitude, longitude):
         except requests.RequestException:
             continue
 
-    return []
+    try:
+        delta_latitude = SEARCH_RADIUS_KM / 111
+        delta_longitude = SEARCH_RADIUS_KM / (111 * max(math.cos(math.radians(latitude)), 0.2))
+        photon_data = api_get(
+            PHOTON_URL,
+            {
+                "q": "charging_station",
+                "lat": latitude,
+                "lon": longitude,
+                "limit": 50,
+                "bbox": f"{longitude - delta_longitude},{latitude - delta_latitude},{longitude + delta_longitude},{latitude + delta_latitude}",
+            },
+        )
+        stations = []
+        for feature in photon_data.get("features", []):
+            properties = feature.get("properties") or {}
+            coordinates = (feature.get("geometry") or {}).get("coordinates") or []
+            if len(coordinates) != 2:
+                continue
+            station_lon, station_lat = coordinates
+            if math.hypot(
+                (station_lat - latitude) * 111,
+                (station_lon - longitude) * 111 * math.cos(math.radians(latitude)),
+            ) > SEARCH_RADIUS_KM:
+                continue
+            stations.append(
+                {
+                    "id": f"photon-{properties.get('osm_type')}-{properties.get('osm_id')}",
+                    "name": properties.get("name") or "Unnamed charging station",
+                    "lat": station_lat,
+                    "lon": station_lon,
+                    "capacity": None,
+                    "type": "Charging station",
+                    "status": "Operational",
+                    "source": "OpenStreetMap via Photon",
+                }
+            )
+        return stations
+    except requests.RequestException:
+        return []
+
 
 
 def add_road_data(stations, latitude, longitude):
