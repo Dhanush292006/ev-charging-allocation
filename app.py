@@ -106,6 +106,46 @@ def api_get(url, params=None):
     return response.json()
 
 
+def fetch_photon_stations(latitude, longitude, search_radius_km):
+    delta_latitude = search_radius_km / 111
+    delta_longitude = search_radius_km / (111 * max(math.cos(math.radians(latitude)), 0.2))
+    photon_data = api_get(
+        PHOTON_URL,
+        {
+            "q": "charging_station",
+            "lat": latitude,
+            "lon": longitude,
+            "limit": 50,
+            "bbox": f"{longitude - delta_longitude},{latitude - delta_latitude},{longitude + delta_longitude},{latitude + delta_latitude}",
+        },
+    )
+    stations = []
+    for feature in photon_data.get("features", []):
+        properties = feature.get("properties") or {}
+        coordinates = (feature.get("geometry") or {}).get("coordinates") or []
+        if len(coordinates) != 2:
+            continue
+        station_lon, station_lat = coordinates
+        if math.hypot(
+            (station_lat - latitude) * 111,
+            (station_lon - longitude) * 111 * math.cos(math.radians(latitude)),
+        ) > search_radius_km:
+            continue
+        stations.append(
+            {
+                "id": f"photon-{properties.get('osm_type')}-{properties.get('osm_id')}",
+                "name": properties.get("name") or "Unnamed charging station",
+                "lat": station_lat,
+                "lon": station_lon,
+                "capacity": None,
+                "type": "Charging station",
+                "status": "Operational",
+                "source": "OpenStreetMap via Photon",
+            }
+        )
+    return stations
+
+
 def fetch_stations(latitude, longitude, search_radius_km):
     try:
         data = api_get(
@@ -153,6 +193,13 @@ def fetch_stations(latitude, longitude, search_radius_km):
     except requests.RequestException:
         pass
 
+    try:
+        photon_stations = fetch_photon_stations(latitude, longitude, search_radius_km)
+        if photon_stations:
+            return photon_stations
+    except requests.RequestException:
+        pass
+
     query = f"[out:json][timeout:20];nwr[amenity=charging_station](around:{search_radius_km * 1000},{latitude},{longitude});out center tags;"
     for overpass_url in [OVERPASS_URL, *OVERPASS_FALLBACK_URLS]:
         try:
@@ -195,46 +242,7 @@ def fetch_stations(latitude, longitude, search_radius_km):
         except requests.RequestException:
             continue
 
-    try:
-        delta_latitude = search_radius_km / 111
-        delta_longitude = search_radius_km / (111 * max(math.cos(math.radians(latitude)), 0.2))
-        photon_data = api_get(
-            PHOTON_URL,
-            {
-                "q": "charging_station",
-                "lat": latitude,
-                "lon": longitude,
-                "limit": 50,
-                "bbox": f"{longitude - delta_longitude},{latitude - delta_latitude},{longitude + delta_longitude},{latitude + delta_latitude}",
-            },
-        )
-        stations = []
-        for feature in photon_data.get("features", []):
-            properties = feature.get("properties") or {}
-            coordinates = (feature.get("geometry") or {}).get("coordinates") or []
-            if len(coordinates) != 2:
-                continue
-            station_lon, station_lat = coordinates
-            if math.hypot(
-                (station_lat - latitude) * 111,
-                (station_lon - longitude) * 111 * math.cos(math.radians(latitude)),
-            ) > search_radius_km:
-                continue
-            stations.append(
-                {
-                    "id": f"photon-{properties.get('osm_type')}-{properties.get('osm_id')}",
-                    "name": properties.get("name") or "Unnamed charging station",
-                    "lat": station_lat,
-                    "lon": station_lon,
-                    "capacity": None,
-                    "type": "Charging station",
-                    "status": "Operational",
-                    "source": "OpenStreetMap via Photon",
-                }
-            )
-        return stations
-    except requests.RequestException:
-        return []
+    return []
 
 
 
