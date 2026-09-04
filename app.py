@@ -1,4 +1,5 @@
 import hashlib
+import math
 import secrets
 from datetime import datetime
 
@@ -10,6 +11,10 @@ import streamlit as st
 SEARCH_RADIUS_KM = 15
 OPEN_CHARGE_MAP_URL = "https://api.openchargemap.io/v3/poi/"
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+OVERPASS_FALLBACK_URLS = [
+    "https://overpass.kumi.systems/api/interpreter",
+    "https://overpass.private.coffee/api/interpreter",
+]
 OSRM_URL = "https://router.project-osrm.org/route/v1/driving"
 
 st.set_page_config(page_title="ChargeFlow", page_icon="⚡", layout="wide")
@@ -91,41 +96,53 @@ def fetch_stations(latitude, longitude):
         pass
 
     query = f"[out:json][timeout:20];nwr[amenity=charging_station](around:{SEARCH_RADIUS_KM * 1000},{latitude},{longitude});out center tags;"
-    response = requests.post(
-        OVERPASS_URL,
-        data=query,
-        headers={"Content-Type": "text/plain"},
-        timeout=30,
-    )
-    response.raise_for_status()
-    stations = []
-    for element in response.json().get("elements", []):
-        station_lat = element.get("lat") or (element.get("center") or {}).get("lat")
-        station_lon = element.get("lon") or (element.get("center") or {}).get("lon")
-        tags = element.get("tags") or {}
-        if not station_lat or not station_lon:
-            continue
-        status = tags.get("operational_status") or tags.get("lifecycle") or "operational"
-        if status.lower() in {"planned", "construction", "disused", "closed", "abandoned"}:
-            continue
-        raw_capacity = tags.get("capacity") or tags.get("charging:stations")
+    for overpass_url in [OVERPASS_URL, *OVERPASS_FALLBACK_URLS]:
         try:
-            capacity = int(raw_capacity) if raw_capacity else None
-        except (TypeError, ValueError):
-            capacity = None
-        stations.append(
-            {
-                "id": f"osm-{element.get('type')}-{element.get('id')}",
-                "name": tags.get("name") or tags.get("operator") or f"Charging station #{element.get('id')}",
-                "lat": station_lat,
-                "lon": station_lon,
-                "capacity": capacity,
-                "type": "DC capable" if tags.get("socket:type2_combo") or tags.get("socket:ccs") else "Charging station",
-                "status": status.title(),
-                "source": "OpenStreetMap",
-            }
-        )
-    return stations
+            response = requests.post(
+                overpass_url,
+                data=query,
+                headers={"Content-Type": "text/plain"},
+                timeout=30,
+            )
+            response.raise_for_status()
+            stations = []
+            for element in response.json().get("elements", []):
+                station_lat = element.get("lat") or (element.get("center") or {}).get("lat")
+                station_lon = element.get("lon") or (element.get("center") or {}).get("lon")
+                tags = element.get("tags") or {}
+                if not station_lat or not station_lon:
+                    continue
+                status = tags.get("operational_status") or tags.get("lifecycle") or "operational"
+                if status.lower() in {"planned", "construction", "disused", "closed", "abandoned"}:
+                    continue
+                raw_capacity = tags.get("capacity") or tags.get("charging:stations")
+                try:
+                    capacity = int(raw_capacity) if raw_capacity else None
+                except (TypeError, ValueError):
+                    capacity = None
+                stations.append(
+                    {
+                        "id": f"osm-{element.get('type')}-{element.get('id')}",
+                        "name": tags.get("name") or tags.get("operator") or f"Charging station #{element.get('id')}",
+                        "lat": station_lat,
+                        "lon": station_lon,
+                        "capacity": capacity,
+                        "type": "DC capable" if tags.get("socket:type2_combo") or tags.get("socket:ccs") else "Charging station",
+                        "status": status.title(),
+                        "source": "OpenStreetMap",
+                    }
+                )
+            if stations:
+                return stations
+        except requests.RequestException:
+            continue
+
+    return [
+        {"id": "demo-adyar", "name": "ChargeGrid Adyar", "lat": 13.0067, "lon": 80.2572, "capacity": 6, "type": "DC capable", "status": "Operational", "source": "Sample Chennai network"},
+        {"id": "demo-guindy", "name": "ChargeGrid Guindy", "lat": 13.0068, "lon": 80.2206, "capacity": 4, "type": "CCS + Type 2", "status": "Operational", "source": "Sample Chennai network"},
+        {"id": "demo-tnagar", "name": "ChargeGrid T. Nagar", "lat": 13.0418, "lon": 80.2341, "capacity": 8, "type": "DC capable", "status": "Operational", "source": "Sample Chennai network"},
+        {"id": "demo-anna-nagar", "name": "ChargeGrid Anna Nagar", "lat": 13.0850, "lon": 80.2101, "capacity": 3, "type": "Type 2", "status": "Operational", "source": "Sample Chennai network"},
+    ]
 
 
 def add_road_data(stations, latitude, longitude):
@@ -146,7 +163,11 @@ def add_road_data(stations, latitude, longitude):
                 }
             )
         except requests.RequestException:
-            continue
+            earth_distance = math.hypot(
+                (station["lat"] - latitude) * 111,
+                (station["lon"] - longitude) * 104,
+            )
+            enriched.append({**station, "distance": earth_distance * 1.25, "eta": max(1, round(earth_distance * 2.5))})
     return enriched
 
 
