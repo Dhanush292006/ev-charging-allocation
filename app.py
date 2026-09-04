@@ -9,6 +9,7 @@ import streamlit as st
 
 SEARCH_RADIUS_KM = 15
 OPEN_CHARGE_MAP_URL = "https://api.openchargemap.io/v3/poi/"
+OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 OSRM_URL = "https://router.project-osrm.org/route/v1/driving"
 
 st.set_page_config(page_title="ChargeFlow", page_icon="⚡", layout="wide")
@@ -43,44 +44,85 @@ def api_get(url, params=None):
 
 
 def fetch_stations(latitude, longitude):
-    data = api_get(
-        OPEN_CHARGE_MAP_URL,
-        {
-            "output": "json",
-            "latitude": latitude,
-            "longitude": longitude,
-            "distance": SEARCH_RADIUS_KM,
-            "distanceunit": "KM",
-            "maxresults": 50,
-            "compact": "true",
-        },
+    try:
+        data = api_get(
+            OPEN_CHARGE_MAP_URL,
+            {
+                "output": "json",
+                "latitude": latitude,
+                "longitude": longitude,
+                "distance": SEARCH_RADIUS_KM,
+                "distanceunit": "KM",
+                "maxresults": 50,
+                "compact": "true",
+            },
+        )
+        stations = []
+        for entry in data:
+            info = entry.get("AddressInfo") or {}
+            connections = entry.get("Connections") or []
+            status = (entry.get("StatusType") or {}).get("Title", "operational").lower()
+            if any(term in status for term in ("planned", "construction", "disused", "closed", "abandoned")):
+                continue
+            station_lat = info.get("Latitude")
+            station_lon = info.get("Longitude")
+            if not station_lat or not station_lon:
+                continue
+            capacity = sum(connection.get("Quantity") or 0 for connection in connections) or None
+            connector_types = [
+                (connection.get("ConnectionType") or {}).get("Title")
+                for connection in connections
+            ]
+            stations.append(
+                {
+                    "id": f"ocm-{entry.get('ID')}",
+                    "name": info.get("Title") or f"Charging station #{entry.get('ID')}",
+                    "lat": station_lat,
+                    "lon": station_lon,
+                    "capacity": capacity,
+                    "type": " + ".join(value for value in connector_types if value)[:80] or "Charging station",
+                    "status": status.title(),
+                    "source": "Open Charge Map",
+                }
+            )
+        if stations:
+            return stations
+    except requests.RequestException:
+        pass
+
+    query = f"[out:json][timeout:20];nwr[amenity=charging_station](around:{SEARCH_RADIUS_KM * 1000},{latitude},{longitude});out center tags;"
+    response = requests.post(
+        OVERPASS_URL,
+        data=query,
+        headers={"Content-Type": "text/plain"},
+        timeout=30,
     )
+    response.raise_for_status()
     stations = []
-    for entry in data:
-        info = entry.get("AddressInfo") or {}
-        connections = entry.get("Connections") or []
-        status = (entry.get("StatusType") or {}).get("Title", "operational").lower()
-        if any(term in status for term in ("planned", "construction", "disused", "closed", "abandoned")):
-            continue
-        station_lat = info.get("Latitude")
-        station_lon = info.get("Longitude")
+    for element in response.json().get("elements", []):
+        station_lat = element.get("lat") or (element.get("center") or {}).get("lat")
+        station_lon = element.get("lon") or (element.get("center") or {}).get("lon")
+        tags = element.get("tags") or {}
         if not station_lat or not station_lon:
             continue
-        capacity = sum(connection.get("Quantity") or 0 for connection in connections) or None
-        connector_types = [
-            (connection.get("ConnectionType") or {}).get("Title")
-            for connection in connections
-        ]
+        status = tags.get("operational_status") or tags.get("lifecycle") or "operational"
+        if status.lower() in {"planned", "construction", "disused", "closed", "abandoned"}:
+            continue
+        raw_capacity = tags.get("capacity") or tags.get("charging:stations")
+        try:
+            capacity = int(raw_capacity) if raw_capacity else None
+        except (TypeError, ValueError):
+            capacity = None
         stations.append(
             {
-                "id": f"ocm-{entry.get('ID')}",
-                "name": info.get("Title") or f"Charging station #{entry.get('ID')}",
+                "id": f"osm-{element.get('type')}-{element.get('id')}",
+                "name": tags.get("name") or tags.get("operator") or f"Charging station #{element.get('id')}",
                 "lat": station_lat,
                 "lon": station_lon,
                 "capacity": capacity,
-                "type": " + ".join(value for value in connector_types if value)[:80] or "Charging station",
+                "type": "DC capable" if tags.get("socket:type2_combo") or tags.get("socket:ccs") else "Charging station",
                 "status": status.title(),
-                "source": "Open Charge Map",
+                "source": "OpenStreetMap",
             }
         )
     return stations
