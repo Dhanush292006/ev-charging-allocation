@@ -53,7 +53,7 @@ def api_get(url, params=None):
     return response.json()
 
 
-def fetch_stations(latitude, longitude):
+def fetch_stations(latitude, longitude, search_radius_km):
     try:
         data = api_get(
             OPEN_CHARGE_MAP_URL,
@@ -61,7 +61,7 @@ def fetch_stations(latitude, longitude):
                 "output": "json",
                 "latitude": latitude,
                 "longitude": longitude,
-                "distance": SEARCH_RADIUS_KM,
+                "distance": search_radius_km,
                 "distanceunit": "KM",
                 "maxresults": 50,
                 "compact": "true",
@@ -100,7 +100,7 @@ def fetch_stations(latitude, longitude):
     except requests.RequestException:
         pass
 
-    query = f"[out:json][timeout:20];nwr[amenity=charging_station](around:{SEARCH_RADIUS_KM * 1000},{latitude},{longitude});out center tags;"
+    query = f"[out:json][timeout:20];nwr[amenity=charging_station](around:{search_radius_km * 1000},{latitude},{longitude});out center tags;"
     for overpass_url in [OVERPASS_URL, *OVERPASS_FALLBACK_URLS]:
         try:
             response = requests.post(
@@ -143,8 +143,8 @@ def fetch_stations(latitude, longitude):
             continue
 
     try:
-        delta_latitude = SEARCH_RADIUS_KM / 111
-        delta_longitude = SEARCH_RADIUS_KM / (111 * max(math.cos(math.radians(latitude)), 0.2))
+        delta_latitude = search_radius_km / 111
+        delta_longitude = search_radius_km / (111 * max(math.cos(math.radians(latitude)), 0.2))
         photon_data = api_get(
             PHOTON_URL,
             {
@@ -165,7 +165,7 @@ def fetch_stations(latitude, longitude):
             if math.hypot(
                 (station_lat - latitude) * 111,
                 (station_lon - longitude) * 111 * math.cos(math.radians(latitude)),
-            ) > SEARCH_RADIUS_KM:
+            ) > search_radius_km:
                 continue
             stations.append(
                 {
@@ -242,7 +242,7 @@ with st.sidebar:
     st.write("◷ Activity")
     st.divider()
     st.success("System operational")
-    st.caption("Live map data · 15 km radius")
+    st.caption("Live map data · adjustable radius")
 
 st.markdown("<div class='eyebrow'>THURSDAY, 03 SEPTEMBER 2026</div>", unsafe_allow_html=True)
 st.title("Allocation command center")
@@ -267,6 +267,8 @@ with st.container(border=True):
     with second_row[2]:
         longitude = st.number_input("Current longitude", value=80.2707, format="%.5f", help="Default: Chennai")
 
+    search_radius_km = st.slider("Search radius", 5, 50, SEARCH_RADIUS_KM, 5, format="%d km")
+
     third_row = st.columns(2)
     with third_row[0]:
         destination = st.text_input("Destination (optional)", placeholder="e.g. Chennai Airport")
@@ -281,7 +283,7 @@ if locate:
     else:
         with st.spinner("Loading live station and route data..."):
             try:
-                raw_stations = fetch_stations(latitude, longitude)
+                raw_stations = fetch_stations(latitude, longitude, search_radius_km)
                 stations = add_road_data(raw_stations, latitude, longitude)
                 st.session_state["ranked_stations"] = score_stations(stations, battery_level, arrival_window)
                 st.session_state["location"] = (latitude, longitude)
@@ -296,7 +298,7 @@ st.markdown("<div class='eyebrow'>02 / NETWORK PULSE</div>", unsafe_allow_html=T
 summary = st.columns(3)
 summary[0].metric("Stations found", len(ranked_stations))
 summary[1].metric("With charger data", sum(bool(station["capacity"]) for station in ranked_stations))
-summary[2].metric("Search radius", "15 km")
+summary[2].metric("Search radius", f"{search_radius_km} km")
 
 st.markdown("<div class='eyebrow'>03 / RECOMMENDED ALLOCATION</div>", unsafe_allow_html=True)
 st.header("Stations near your route")
