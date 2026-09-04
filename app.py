@@ -1,5 +1,4 @@
 import hashlib
-import math
 import secrets
 from datetime import datetime
 
@@ -16,6 +15,10 @@ OVERPASS_FALLBACK_URLS = [
     "https://overpass.private.coffee/api/interpreter",
 ]
 OSRM_URL = "https://router.project-osrm.org/route/v1/driving"
+ROUTING_URLS = [
+    OSRM_URL,
+    "https://routing.openstreetmap.de/routed-car/route/v1/driving",
+]
 
 st.set_page_config(page_title="ChargeFlow", page_icon="⚡", layout="wide")
 
@@ -137,37 +140,30 @@ def fetch_stations(latitude, longitude):
         except requests.RequestException:
             continue
 
-    return [
-        {"id": "demo-adyar", "name": "ChargeGrid Adyar", "lat": 13.0067, "lon": 80.2572, "capacity": 6, "type": "DC capable", "status": "Operational", "source": "Sample Chennai network"},
-        {"id": "demo-guindy", "name": "ChargeGrid Guindy", "lat": 13.0068, "lon": 80.2206, "capacity": 4, "type": "CCS + Type 2", "status": "Operational", "source": "Sample Chennai network"},
-        {"id": "demo-tnagar", "name": "ChargeGrid T. Nagar", "lat": 13.0418, "lon": 80.2341, "capacity": 8, "type": "DC capable", "status": "Operational", "source": "Sample Chennai network"},
-        {"id": "demo-anna-nagar", "name": "ChargeGrid Anna Nagar", "lat": 13.0850, "lon": 80.2101, "capacity": 3, "type": "Type 2", "status": "Operational", "source": "Sample Chennai network"},
-    ]
+    return []
 
 
 def add_road_data(stations, latitude, longitude):
     enriched = []
     for station in stations[:12]:
-        try:
-            route = api_get(
-                f"{OSRM_URL}/{longitude},{latitude};{station['lon']},{station['lat']}?overview=false"
-            )
-            if route.get("code") != "Ok":
+        for routing_url in ROUTING_URLS:
+            try:
+                route = api_get(
+                    f"{routing_url}/{longitude},{latitude};{station['lon']},{station['lat']}?overview=false"
+                )
+                if route.get("code") != "Ok":
+                    continue
+                route_data = route["routes"][0]
+                enriched.append(
+                    {
+                        **station,
+                        "distance": route_data["distance"] / 1000,
+                        "eta": max(1, round(route_data["duration"] / 60)),
+                    }
+                )
+                break
+            except requests.RequestException:
                 continue
-            route_data = route["routes"][0]
-            enriched.append(
-                {
-                    **station,
-                    "distance": route_data["distance"] / 1000,
-                    "eta": max(1, round(route_data["duration"] / 60)),
-                }
-            )
-        except requests.RequestException:
-            earth_distance = math.hypot(
-                (station["lat"] - latitude) * 111,
-                (station["lon"] - longitude) * 104,
-            )
-            enriched.append({**station, "distance": earth_distance * 1.25, "eta": max(1, round(earth_distance * 2.5))})
     return enriched
 
 
@@ -263,7 +259,10 @@ summary[2].metric("Search radius", "15 km")
 st.markdown("<div class='eyebrow'>03 / RECOMMENDED ALLOCATION</div>", unsafe_allow_html=True)
 st.header("Stations near your route")
 if not ranked_stations:
-    st.info("Enter the trip details and select Allocate best station to load live recommendations.")
+    if "ranked_stations" in st.session_state:
+        st.warning("No verified live station routes are available right now. Try again later when the map services respond.")
+    else:
+        st.info("Enter the trip details and select Allocate best station to load live recommendations.")
 else:
     for index, station in enumerate(ranked_stations):
         label = " · BEST MATCH" if index == 0 else ""
