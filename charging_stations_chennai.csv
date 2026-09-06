@@ -1,0 +1,7 @@
+id,name,latitude,longitude,capacity,connector_types,status,source
+osm-node-9992403939,Charging station #9992403939,13.1085033,80.2810805,,Charging station,operational,OpenStreetMap
+osm-node-10036499344,Charging station #10036499344,13.0317217,80.2419487,,Charging station,operational,OpenStreetMap
+osm-node-12624560446,Charging station #12624560446,13.0791255,80.261572,60,DC capable,operational,OpenStreetMap
+osm-node-13619600201,Charging station #13619600201,13.0433272,80.273731,,Charging station,operational,OpenStreetMap
+osm-node-14047497970,Charging station #14047497970,13.071801,80.2223305,1,Charging station,operational,OpenStreetMap
+osm-node-14059886602,BPCL Charging Station,13.0979111,80.2384469,,Charging station,operational,OpenStreetMap

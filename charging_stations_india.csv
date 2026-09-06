@@ -1,0 +1,586 @@
+id,name,latitude,longitude,capacity,connector_types,status,source
+osm-node-763446417,Charging station #763446417,18.496101,73.8088593,,Charging station,operational,OpenStreetMap
+osm-node-1024717983,Cycle Kiosk / E-Vehicle Recharge,12.0010333,79.8100656,,Charging station,operational,OpenStreetMap
+osm-node-2636339970,tata,17.7085964,83.3107898,50,Charging station,operational,OpenStreetMap
+osm-node-3485765661,BMW,16.511133,80.6192659,20,Charging station,operational,OpenStreetMap
+osm-node-3612553734,Charging station #3612553734,17.3649588,78.4749286,,Charging station,operational,OpenStreetMap
+osm-node-4376874204,PRSANNA,19.9245214,79.3168107,,Charging station,operational,OpenStreetMap
+osm-node-4376876211,Charging station #4376876211,19.9677547,79.308204,,Charging station,operational,OpenStreetMap
+osm-node-4376876214,INDIAN OILS,19.9584753,79.3164742,,Charging station,operational,OpenStreetMap
+osm-node-4376877604,Hindustan petroleum,19.9503234,79.2979527,,Charging station,operational,OpenStreetMap
+osm-node-4376878409,Charging station #4376878409,25.8275913,80.568888,,Charging station,operational,OpenStreetMap
+osm-node-4434163189,Elanthikkara,10.1796957,76.2673207,,Charging station,operational,OpenStreetMap
+osm-node-4845919917,Tata power,17.7131833,83.298845,50,Charging station,operational,OpenStreetMap
+osm-node-5295274409,voltran,17.8384022,82.9994147,10,Charging station,operational,OpenStreetMap
+osm-node-5295276530,Ather,17.840483,82.9998377,10,Charging station,operational,OpenStreetMap
+osm-node-5305546325,KPTCL,16.8129246,75.7157248,,Charging station,operational,OpenStreetMap
+osm-node-5694140128,Charging station #5694140128,28.555381,77.228418,,Charging station,operational,OpenStreetMap
+osm-node-6116153836,Charging station #6116153836,18.567214,73.7719864,,Charging station,operational,OpenStreetMap
+osm-node-6128146875,Charging station #6128146875,16.8075405,77.1444785,,Charging station,operational,OpenStreetMap
+osm-node-6128170285,Charging station #6128170285,16.8860925,76.9843397,,Charging station,operational,OpenStreetMap
+osm-node-6305362606,Charging station #6305362606,12.0045118,79.8007503,,Charging station,operational,OpenStreetMap
+osm-node-6404118987,Energy Efficiency Services Limited (EESL),28.6336834,77.2219946,1,Charging station,operational,OpenStreetMap
+osm-node-6404118988,Energy Efficiency Services Limited (EESL),28.6336147,77.2218243,2,Charging station,operational,OpenStreetMap
+osm-node-6562168075,Charging station #6562168075,28.9311189,77.099711,,Charging station,operational,OpenStreetMap
+osm-node-6757221285,ZEVFY,26.719541,88.4239516,,Charging station,operational,OpenStreetMap
+osm-node-6761961056,Charging station #6761961056,28.6341092,77.2202799,1,Charging station,operational,OpenStreetMap
+osm-node-6761961057,Energy Efficiency Services Limited (EESL),28.633798,77.2208339,1,Charging station,operational,OpenStreetMap
+osm-node-6769723885,Solar Powered Charging Station,11.9808709,79.7768883,,Charging station,operational,OpenStreetMap
+osm-node-6798121626,C.S.R. Hospital,17.706036,83.3068947,5,Charging station,operational,OpenStreetMap
+osm-node-6918479540,Charging station #6918479540,28.5854347,77.2203893,,Charging station,operational,OpenStreetMap
+osm-node-6918479558,Charging station #6918479558,28.587056,77.2120476,,Charging station,operational,OpenStreetMap
+osm-node-6961442929,Charging station #6961442929,28.5865591,77.1934263,,Charging station,operational,OpenStreetMap
+osm-node-6961442954,Charging station #6961442954,28.5866112,77.1934058,,Charging station,operational,OpenStreetMap
+osm-node-6988161557,Charging station #6988161557,28.6342608,77.2206422,,Charging station,operational,OpenStreetMap
+osm-node-6988161559,Charging station #6988161559,28.634276,77.2209612,,Charging station,operational,OpenStreetMap
+osm-node-7083796927,Charging station #7083796927,28.6350123,77.2197325,,Charging station,operational,OpenStreetMap
+osm-node-7083916144,EESL,28.6341151,77.217651,1,Charging station,operational,OpenStreetMap
+osm-node-7123744187,Charging station #7123744187,10.6488315,76.0710605,,Charging station,operational,OpenStreetMap
+osm-node-7241502289,Afzal,17.8029367,73.1020851,,Charging station,operational,OpenStreetMap
+osm-node-7274257107,Charging station #7274257107,28.6327684,77.2228545,1,Charging station,operational,OpenStreetMap
+osm-node-7333964934,Essar petrol pump,9.4781662,76.5861987,,Charging station,operational,OpenStreetMap
+osm-node-7334004308,Hindhusthan petrolium,9.4772838,76.5817059,,Charging station,operational,OpenStreetMap
+osm-node-7387205059,FCS,28.6680488,77.3739552,,Charging station,operational,OpenStreetMap
+osm-node-7387324503,FCS -2,28.6699882,77.3792992,20,Charging station,operational,OpenStreetMap
+osm-node-7387335133,FCS,28.6669889,77.3716593,,Charging station,operational,OpenStreetMap
+osm-node-7554422920,GBU- CHARGING STATION,28.4245314,77.5209704,,Charging station,operational,OpenStreetMap
+osm-node-7570518867,BISRAKH FCS,28.5747161,77.4453156,,Charging station,operational,OpenStreetMap
+osm-node-7572304299,BOTANICAL FCS,28.5651948,77.3343937,,Charging station,operational,OpenStreetMap
+osm-node-8189928160,Tata power,17.7163716,83.326209,50,Charging station,operational,OpenStreetMap
+osm-node-8212529301,tata power,17.710847,83.3011276,50,Charging station,operational,OpenStreetMap
+osm-node-8286066651,KSEB charging station,8.8926952,76.5790255,2,DC capable,operational,OpenStreetMap
+osm-node-8836770673,KEL Charging Station,9.9488824,76.383094,,Charging station,operational,OpenStreetMap
+osm-node-8893808042,Electric Vehicle Charging Station,8.4810673,76.9126537,,Charging station,operational,OpenStreetMap
+osm-node-8901628132,ELECTRICITY HOUSE,27.8943813,78.0735323,,Charging station,operational,OpenStreetMap
+osm-node-8919501650,Tata Motors True Sai Works FC,11.6828829,78.1260507,25,Charging station,operational,OpenStreetMap
+osm-node-8919511936,Zeon Charging Navakkarai,10.8559725,76.8624485,50,Charging station,operational,OpenStreetMap
+osm-node-8948790096,Plug N Go,28.6214714,77.2936333,,Charging station,operational,OpenStreetMap
+osm-node-9096832477,Ather Energy Charging Point,9.9804506,76.317433,,Charging station,operational,OpenStreetMap
+osm-node-9104747115,Charging station #9104747115,28.5288838,77.2137728,,Charging station,operational,OpenStreetMap
+osm-node-9202909866,Ather Charging Grid,12.975668,77.6413089,8,Charging station,operational,OpenStreetMap
+osm-node-9204462345,veev,11.3300012,76.902597,,DC capable,operational,OpenStreetMap
+osm-node-9204495608,srt tata ev charging station,11.022897,76.9515473,2,DC capable,operational,OpenStreetMap
+osm-node-9215039103,Fortum EV Charger,19.2329576,72.9760606,1,Charging station,operational,OpenStreetMap
+osm-node-9237403818,Charging station #9237403818,28.630944,77.2233578,,Charging station,operational,OpenStreetMap
+osm-node-9237403820,Charging station #9237403820,28.6310563,77.2230955,,Charging station,operational,OpenStreetMap
+osm-node-9252505223,PowerGrid Charging Station,19.0245243,73.0135121,,Charging station,operational,OpenStreetMap
+osm-node-9411828530,Ather Energy,18.5071941,73.8037729,,Charging station,operational,OpenStreetMap
+osm-node-9508125095,Ather Charging Station,11.1380148,76.9405241,1,Charging station,operational,OpenStreetMap
+osm-node-9524427359,TATA Charging Station,10.0773023,76.3376442,,Charging station,operational,OpenStreetMap
+osm-node-9527221544,veev,11.3217865,76.9162515,2,DC capable,operational,OpenStreetMap
+osm-node-9527967749,Charging station #9527967749,13.0415766,77.6204588,,Charging station,operational,OpenStreetMap
+osm-node-9529343817,Charging station #9529343817,27.2708197,78.0407736,,Charging station,operational,OpenStreetMap
+osm-node-9684753376,Charging station #9684753376,28.6040475,77.1977963,,Charging station,operational,OpenStreetMap
+osm-node-9684753377,Charging station #9684753377,28.6040394,77.1977808,,Charging station,operational,OpenStreetMap
+osm-node-9684753378,Charging station #9684753378,28.6040316,77.1977661,,Charging station,operational,OpenStreetMap
+osm-node-9717918117,Electric vehicle charging station,22.5408647,88.3680476,,Charging station,operational,OpenStreetMap
+osm-node-9717920317,Electric vehicle chargeing station,22.5665448,88.3521064,,Charging station,operational,OpenStreetMap
+osm-node-9717923217,Electric vehicle charging station tata,22.5475251,88.3495487,,Charging station,operational,OpenStreetMap
+osm-node-9717925317,Electric Vehicle Charging Station,22.5813902,88.3421409,,Charging station,operational,OpenStreetMap
+osm-node-9739308831,EV Charging station,9.5798915,76.9697219,,Charging station,operational,OpenStreetMap
+osm-node-9739382793,Charging station #9739382793,28.5483686,77.2547221,,Charging station,operational,OpenStreetMap
+osm-node-9739382794,Charging station #9739382794,28.5482674,77.2545695,,Charging station,operational,OpenStreetMap
+osm-node-9739382795,Charging station #9739382795,28.5483966,77.2547099,,Charging station,operational,OpenStreetMap
+osm-node-9740697395,Charging station #9740697395,31.2197083,75.7769537,,Charging station,operational,OpenStreetMap
+osm-node-9780694390,Zeon Charging station,11.5193364,77.9350619,50,DC capable,operational,OpenStreetMap
+osm-node-9780784996,Zeon Charging station,11.7783495,78.1987759,22,Charging station,operational,OpenStreetMap
+osm-node-9793208900,EV Charging Station,22.4628605,72.1589043,,Charging station,operational,OpenStreetMap
+osm-node-9796873472,BESCOM,12.9947371,77.6993007,2,Charging station,operational,OpenStreetMap
+osm-node-9811396097,Charging station #9811396097,12.9775829,77.6389895,,Charging station,operational,OpenStreetMap
+osm-node-9837771580,Electric Vehicle Charging Station,23.3962613,85.314143,,Charging station,operational,OpenStreetMap
+osm-node-9837771581,Electric Vehicle Charging Station,23.371942,85.3261981,,Charging station,operational,OpenStreetMap
+osm-node-9917415768,Charging station #9917415768,12.9733967,77.6357561,,Charging station,operational,OpenStreetMap
+osm-node-9917415769,Charging station #9917415769,12.9733738,77.6357554,,Charging station,operational,OpenStreetMap
+osm-node-9952180939,Autocraft charging,9.6338138,76.3336507,,Charging station,operational,OpenStreetMap
+osm-node-9952802373,ElectriVa,28.5692695,77.1884585,,Charging station,operational,OpenStreetMap
+osm-node-9952802374,ElectriVa,28.5692799,77.1883649,,Charging station,operational,OpenStreetMap
+osm-node-9956403209,Zeon Charging Station,11.7553892,78.0509746,,DC capable,operational,OpenStreetMap
+osm-node-9956542246,Zeon Charging Station,11.4925016,78.1536802,50,Charging station,operational,OpenStreetMap
+osm-node-9992403939,Charging station #9992403939,13.1085033,80.2810805,,Charging station,operational,OpenStreetMap
+osm-node-10000890138,Tata Power,17.273827,74.1802556,4,DC capable,operational,OpenStreetMap
+osm-node-10008994593,Charging station #10008994593,28.622372,77.290246,,Charging station,operational,OpenStreetMap
+osm-node-10008994594,Charging station #10008994594,28.6223602,77.2902508,,Charging station,operational,OpenStreetMap
+osm-node-10013758817,Tata power,18.6111535,73.7831554,2,Charging station,operational,OpenStreetMap
+osm-node-10036499344,Charging station #10036499344,13.0317217,80.2419487,,Charging station,operational,OpenStreetMap
+osm-node-10048789353,Sai Krupa,19.3480213,74.2068907,2,Charging station,operational,OpenStreetMap
+osm-node-10049044828,Car Mall,19.9518444,73.7539002,2,DC capable,operational,OpenStreetMap
+osm-node-10050798916,Hotel Sanskruti,19.97183,73.6802627,2,DC capable,operational,OpenStreetMap
+osm-node-10053873979,Laxmi Refreshments,19.3166356,74.1749919,1,DC capable,operational,OpenStreetMap
+osm-node-10055287289,Shridha,18.9913873,73.9427761,2,Charging station,operational,OpenStreetMap
+osm-node-10089151842,ElectriVa,28.5426954,77.2219126,4,Charging station,operational,OpenStreetMap
+osm-node-10097434142,Bolt,18.5095633,73.8147009,8,Charging station,operational,OpenStreetMap
+osm-node-10097434143,Ather Energy,18.5105681,73.781902,1,Charging station,operational,OpenStreetMap
+osm-node-10097434144,Ather Energy,18.4844962,73.8496753,1,Charging station,operational,OpenStreetMap
+osm-node-10097460085,Ather Energy,18.5189771,73.8304638,,Charging station,operational,OpenStreetMap
+osm-node-10115952217,Electric vehicle charging station,22.6075228,88.3922575,,Charging station,operational,OpenStreetMap
+osm-node-10115962717,Electric vehicle charging station 20kw &7kw,22.5093598,88.3674117,,Charging station,operational,OpenStreetMap
+osm-node-10121102748,Indian oil mammoodu,9.4804068,76.599247,,Charging station,operational,OpenStreetMap
+osm-node-10137291010,Zeon Charging,12.9069204,78.9619166,50,Charging station,operational,OpenStreetMap
+osm-node-10177662896,Charging station #10177662896,12.9137732,77.6441735,1,Charging station,operational,OpenStreetMap
+osm-node-10178076779,Charging station #10178076779,13.1973512,77.7076171,,Charging station,operational,OpenStreetMap
+osm-node-10197717353,Charging station #10197717353,9.9732863,78.2159576,,Charging station,operational,OpenStreetMap
+osm-node-10203122676,Statiq Nandagav,18.6186752,72.9004606,,Charging station,operational,OpenStreetMap
+osm-node-10205648223,Go e go,18.6433491,72.8762211,4,Charging station,operational,OpenStreetMap
+osm-node-10240014908,Charging station #10240014908,28.633573,77.2234733,,Charging station,operational,OpenStreetMap
+osm-node-10241768254,Charging station #10241768254,28.5903206,77.2201483,,Charging station,operational,OpenStreetMap
+osm-node-10241775591,Charging station #10241775591,28.5902808,77.2197587,,Charging station,operational,OpenStreetMap
+osm-node-10241805232,Charging station #10241805232,28.5903207,77.2201225,,Charging station,operational,OpenStreetMap
+osm-node-10241808063,Charging station #10241808063,28.5903054,77.2199561,,Charging station,operational,OpenStreetMap
+osm-node-10250046452,Tata,18.5536336,73.806562,2,Charging station,operational,OpenStreetMap
+osm-node-10258816479,Charging station #10258816479,9.4166463,76.5755312,,Charging station,operational,OpenStreetMap
+osm-node-10285005409,Maa Tara Fuel Centre,25.6536964,87.3612525,,Charging station,operational,OpenStreetMap
+osm-node-10285393622,Tata Power,18.9561767,73.1627884,1,Charging station,operational,OpenStreetMap
+osm-node-10285406628,Jio-BP,19.0874903,73.0796316,2,Charging station,operational,OpenStreetMap
+osm-node-10290789663,Charging station #10290789663,18.5788787,73.7624887,,Charging station,operational,OpenStreetMap
+osm-node-10293872605,inGO,12.9712776,77.6078832,,Charging station,operational,OpenStreetMap
+osm-node-10294506356,Charging station #10294506356,12.9764825,77.6268299,,Charging station,operational,OpenStreetMap
+osm-node-10553764693,Charging station #10553764693,19.1597944,72.858293,,Charging station,operational,OpenStreetMap
+osm-node-10553919109,Electric Vehicle Charging Station,22.5942498,88.4719544,,Charging station,operational,OpenStreetMap
+osm-node-10553919709,Electric Vehicle Charging Station,22.5994781,88.4719664,,Charging station,operational,OpenStreetMap
+osm-node-10553919710,Electric Vehicle Charging Station,22.5845228,88.4908908,,Charging station,operational,OpenStreetMap
+osm-node-10553924809,Mahindra Charging Station,22.5785223,88.4529998,,Charging station,operational,OpenStreetMap
+osm-node-10553925409,EESL Charging Station,22.5785173,88.4526568,,Charging station,operational,OpenStreetMap
+osm-node-10553967709,Electric Vehicle Charging Station,22.5815869,88.4481696,,Charging station,operational,OpenStreetMap
+osm-node-10554039609,Electric Vehicle Charging Station,22.6606704,88.4418053,,Charging station,operational,OpenStreetMap
+osm-node-10554040909,Electric Vehicle Charging Station,22.6308074,88.4217376,,Charging station,operational,OpenStreetMap
+osm-node-10564130631,Charging station #10564130631,28.6003513,77.2267809,,Charging station,operational,OpenStreetMap
+osm-node-10564291409,Electric Vehicle Charging Station,22.6256458,88.4131756,,Charging station,operational,OpenStreetMap
+osm-node-10573903209,Charging station #10573903209,11.3021696,77.600583,,Charging station,operational,OpenStreetMap
+osm-node-10576228241,Charging station #10576228241,28.596925,77.2229085,,Charging station,operational,OpenStreetMap
+osm-node-10593602327,Charging station #10593602327,28.4188726,77.0392065,,Charging station,operational,OpenStreetMap
+osm-node-10596152553,Charging station #10596152553,11.1824544,77.2845422,,DC capable,operational,OpenStreetMap
+osm-node-10609400587,Charging station #10609400587,26.4783538,80.3149431,,Charging station,operational,OpenStreetMap
+osm-node-10615755147,Trimurti Motors,18.5114349,73.7770341,1,Charging station,operational,OpenStreetMap
+osm-node-10617217605,Tata EZ power Charging station,10.2456298,76.3698488,,Charging station,operational,OpenStreetMap
+osm-node-10661050413,Electric vehicle charging,9.5923007,76.5252561,,Charging station,operational,OpenStreetMap
+osm-node-10671202586,Shell,18.5857278,73.7817517,3,Charging station,operational,OpenStreetMap
+osm-node-10694479767,Charging station #10694479767,28.563383,77.2647745,2,Charging station,operational,OpenStreetMap
+osm-node-10703875766,Charging station #10703875766,28.7263595,77.1628441,,Charging station,operational,OpenStreetMap
+osm-node-10719100420,Charging station #10719100420,18.6170757,73.7673099,1,Charging station,operational,OpenStreetMap
+osm-node-10763275239,Magenta ChargeGrid Charging Station,12.9154635,77.6158909,,Charging station,operational,OpenStreetMap
+osm-node-10778185195,Charging station #10778185195,21.3830946,80.5815147,2,Charging station,operational,OpenStreetMap
+osm-node-10778957417,Charging station #10778957417,28.7242899,77.1802238,,Charging station,operational,OpenStreetMap
+osm-node-10797010207,Tata power,18.5998693,73.7548665,,Charging station,operational,OpenStreetMap
+osm-node-10797010208,Tata power,18.5995979,73.7548745,,DC capable,operational,OpenStreetMap
+osm-node-10827297703,Mahavitaran,19.0671494,73.0075344,,Charging station,operational,OpenStreetMap
+osm-node-10830973004,Charging station #10830973004,32.0855844,77.1263081,30,Charging station,operational,OpenStreetMap
+osm-node-10841782157,Ather Energy,18.5887644,73.7827295,1,Charging station,operational,OpenStreetMap
+osm-node-10844985580,Charging station #10844985580,18.5778315,73.9073489,2,Charging station,operational,OpenStreetMap
+osm-node-10870849607,Charging station #10870849607,18.5906635,73.7457888,,Charging station,operational,OpenStreetMap
+osm-node-10905351902,Charging station #10905351902,28.6342282,77.2195272,,Charging station,operational,OpenStreetMap
+osm-node-10908485585,Charging station #10908485585,28.6993047,77.203949,,Charging station,operational,OpenStreetMap
+osm-node-10908485595,Charging station #10908485595,28.6992861,77.203999,,Charging station,operational,OpenStreetMap
+osm-node-10917018646,Ather grid,11.2870573,76.9637875,,Charging station,operational,OpenStreetMap
+osm-node-10922054270,Charging station #10922054270,28.6315233,77.2199032,,Charging station,operational,OpenStreetMap
+osm-node-10948867107,Charging station #10948867107,28.5404442,77.2349474,,Charging station,operational,OpenStreetMap
+osm-node-10978384002,"KSEB Charging station, Kottiyam",8.8664309,76.6688105,,DC capable,operational,OpenStreetMap
+osm-node-11005778506,Charging station #11005778506,18.5638072,73.8068573,,Charging station,operational,OpenStreetMap
+osm-node-11021950303,Tata power,17.8277665,82.9597409,5,Charging station,operational,OpenStreetMap
+osm-node-11021950304,tata power,17.828448,82.9600491,5,Charging station,operational,OpenStreetMap
+osm-node-11030050466,Charging station #11030050466,28.5715108,77.2369501,,Charging station,operational,OpenStreetMap
+osm-node-11030050467,Charging station #11030050467,28.5715706,77.2369881,,Charging station,operational,OpenStreetMap
+osm-node-11033745938,Charging station #11033745938,18.5897559,73.7381716,2,Charging station,operational,OpenStreetMap
+osm-node-11034491772,Charging station #11034491772,12.6406664,78.0642455,,Charging station,operational,OpenStreetMap
+osm-node-11052398205,KSEB,8.601781,76.8976448,,Charging station,operational,OpenStreetMap
+osm-node-11083172400,Charging station #11083172400,28.5443474,77.2455856,6,Charging station,operational,OpenStreetMap
+osm-node-11083172401,Charging station #11083172401,28.5443273,77.2455165,,Charging station,operational,OpenStreetMap
+osm-node-11111611044,Charging station #11111611044,10.5972682,76.4872287,,Charging station,operational,OpenStreetMap
+osm-node-11116285790,ATHER Fast Charger,10.0029987,76.3616989,,Charging station,operational,OpenStreetMap
+osm-node-11132023351,Charging station #11132023351,28.5844378,77.2205342,,Charging station,operational,OpenStreetMap
+osm-node-11132025761,Charging station #11132025761,9.9490802,76.3031193,,Charging station,operational,OpenStreetMap
+osm-node-11148213616,Charging station #11148213616,28.622435,77.2890724,,Charging station,operational,OpenStreetMap
+osm-node-11157574366,EV Super charging station,10.7740371,76.6982216,,Charging station,operational,OpenStreetMap
+osm-node-11178123519,Ather,12.9576825,77.5684466,,Charging station,operational,OpenStreetMap
+osm-node-11214889013,Pulse,12.9805484,77.5978893,,Charging station,operational,OpenStreetMap
+osm-node-11215379064,Ather Grid,15.6141958,73.8141229,,Charging station,operational,OpenStreetMap
+osm-node-11217502924,Westend Mall,18.5623306,73.8069355,5,Charging station,operational,OpenStreetMap
+osm-node-11283405698,Ola Hypercharger,12.9322172,77.6142725,4,Charging station,operational,OpenStreetMap
+osm-node-11286212936,BESCOM,12.916907,77.6102709,2,Charging station,operational,OpenStreetMap
+osm-node-11288409893,KSEB,10.3314912,76.2152726,,Charging station,operational,OpenStreetMap
+osm-node-11288533005,Charging station #11288533005,28.5497356,77.2594429,,Charging station,operational,OpenStreetMap
+osm-node-11288533006,Charging station #11288533006,28.5497042,77.2594888,,Charging station,operational,OpenStreetMap
+osm-node-11288533008,Charging station #11288533008,28.5496589,77.2595584,,Charging station,operational,OpenStreetMap
+osm-node-11288533010,Charging station #11288533010,28.5496792,77.2595256,,Charging station,operational,OpenStreetMap
+osm-node-11288533011,Charging station #11288533011,28.5497534,77.2594016,,Charging station,operational,OpenStreetMap
+osm-node-11297781805,Charging station #11297781805,12.9710109,77.597788,,Charging station,operational,OpenStreetMap
+osm-node-11338045964,Charging station #11338045964,29.864049,77.8950343,,Charging station,operational,OpenStreetMap
+osm-node-11368545133,Charging station #11368545133,28.5697606,77.2381099,,Charging station,operational,OpenStreetMap
+osm-node-11406900271,Charging station #11406900271,28.6019401,77.2372754,1,Charging station,operational,OpenStreetMap
+osm-node-11408768738,Charging station #11408768738,12.9736666,77.5830855,,Charging station,operational,OpenStreetMap
+osm-node-11414388215,Charging station #11414388215,28.5508417,77.2343743,,Charging station,operational,OpenStreetMap
+osm-node-11414388216,Charging station #11414388216,28.5508303,77.2343614,,Charging station,operational,OpenStreetMap
+osm-node-11421789517,Charging station #11421789517,28.6177007,77.28703,,Charging station,operational,OpenStreetMap
+osm-node-11421789521,Charging station #11421789521,28.6176864,77.2870367,,Charging station,operational,OpenStreetMap
+osm-node-11449177423,Charging station #11449177423,28.6606575,77.1433393,,Charging station,operational,OpenStreetMap
+osm-node-11452082417,Charging station #11452082417,18.6347952,73.7990514,,Charging station,operational,OpenStreetMap
+osm-node-11454822427,Charging station #11454822427,28.6672518,77.2532299,,Charging station,operational,OpenStreetMap
+osm-node-11454822430,Charging station #11454822430,28.6672527,77.2532856,,Charging station,operational,OpenStreetMap
+osm-node-11454822431,Charging station #11454822431,28.667252,77.2532583,,Charging station,operational,OpenStreetMap
+osm-node-11463172582,Charging station #11463172582,12.9301946,77.6148303,,Charging station,operational,OpenStreetMap
+osm-node-11478464616,Charging station #11478464616,28.6229566,77.2989161,,Charging station,operational,OpenStreetMap
+osm-node-11505634206,ather,18.0801331,83.3855776,type2,Charging station,operational,OpenStreetMap
+osm-node-11536826351,Charging station #11536826351,11.2789059,76.9478415,,DC capable,operational,OpenStreetMap
+osm-node-11542817290,Charging station #11542817290,12.9362684,77.6076884,,Charging station,operational,OpenStreetMap
+osm-node-11574632419,Ola Hypercharger,10.5352175,76.2156115,2,Charging station,operational,OpenStreetMap
+osm-node-11578223404,Zeal Energy Services,18.4600725,73.786174,,Charging station,operational,OpenStreetMap
+osm-node-11601441778,Charging station #11601441778,28.6531076,77.1562309,,Charging station,operational,OpenStreetMap
+osm-node-11601441779,Switch Station,28.6530158,77.1563495,,Charging station,operational,OpenStreetMap
+osm-node-11601441781,Charging station #11601441781,28.6531276,77.1561984,,Charging station,operational,OpenStreetMap
+osm-node-11637354348,Charging station #11637354348,28.6338798,77.2175045,,Charging station,operational,OpenStreetMap
+osm-node-11642004107,Charging station #11642004107,28.6272979,77.2319249,,Charging station,operational,OpenStreetMap
+osm-node-11669054294,KSEB,10.0696976,77.0613927,5,Charging station,operational,OpenStreetMap
+osm-node-11697454694,Charging station #11697454694,28.5508115,77.2510865,,Charging station,operational,OpenStreetMap
+osm-node-11697454712,Charging station #11697454712,28.5508585,77.2510569,,Charging station,operational,OpenStreetMap
+osm-node-11738870963,Charging station #11738870963,17.9053122,83.4066291,,Charging station,operational,OpenStreetMap
+osm-node-11748976480,tata power,17.7118163,83.317447,50,Charging station,operational,OpenStreetMap
+osm-node-11771960493,Charging station #11771960493,28.5544887,77.195939,,Charging station,operational,OpenStreetMap
+osm-node-11795617114,Charging station #11795617114,28.6286105,77.2196866,1,Charging station,operational,OpenStreetMap
+osm-node-11818010038,Tata,17.7241475,83.3107145,20,Charging station,operational,OpenStreetMap
+osm-node-11818587530,GLIDA Charging Station,13.1831411,77.6760596,15,Charging station,operational,OpenStreetMap
+osm-node-11818587531,BluSmart Charging Station,13.1821565,77.6710546,24,Charging station,operational,OpenStreetMap
+osm-node-11821495340,Charging station #11821495340,28.6799791,77.2085882,3,Charging station,operational,OpenStreetMap
+osm-node-11849592981,ChargeZone,17.6377006,74.0123809,,Charging station,operational,OpenStreetMap
+osm-node-11854233582,Gogate Plaza,15.9287213,74.5291412,3,Charging station,operational,OpenStreetMap
+osm-node-11864351274,Tata Power TSS Sirsi,14.6243646,74.8415578,4,Charging station,operational,OpenStreetMap
+osm-node-11871740090,Charging station #11871740090,28.5649281,77.2245367,,Charging station,operational,OpenStreetMap
+osm-node-11873258339,Charging station #11873258339,28.5540272,77.212758,,Charging station,operational,OpenStreetMap
+osm-node-11875814624,Ganpati Smart Point,28.6775315,77.2080457,,Charging station,operational,OpenStreetMap
+osm-node-11875926233,Charging station #11875926233,28.6219707,77.1948236,4,Charging station,operational,OpenStreetMap
+osm-node-11882034350,Charging station #11882034350,28.5416057,77.2328267,,Charging station,operational,OpenStreetMap
+osm-node-11882034351,Charging station #11882034351,28.5333783,77.2317719,,Charging station,operational,OpenStreetMap
+osm-node-11882034353,Charging station #11882034353,28.541597,77.2328551,,Charging station,operational,OpenStreetMap
+osm-node-11891087067,Charging station #11891087067,28.5483295,77.2547433,,Charging station,operational,OpenStreetMap
+osm-node-11891087068,Charging station #11891087068,28.5482916,77.2547553,,Charging station,operational,OpenStreetMap
+osm-node-11898903434,Charging station #11898903434,30.7448331,76.9033098,,Charging station,operational,OpenStreetMap
+osm-node-11902522652,Charging station #11902522652,9.9670832,76.3227725,,Charging station,operational,OpenStreetMap
+osm-node-11919269548,Charging station #11919269548,12.5884081,78.1463084,2,Charging station,operational,OpenStreetMap
+osm-node-11924865741,Charging station #11924865741,9.2552998,76.8142379,,Charging station,operational,OpenStreetMap
+osm-node-11924937497,Charging station #11924937497,9.2644997,76.808217,16kW,Charging station,operational,OpenStreetMap
+osm-node-11927677057,Ola Hyper Charger,12.9337755,77.6236693,2,Charging station,operational,OpenStreetMap
+osm-node-11927677058,Battery Swap,12.9285835,77.6241904,,Charging station,operational,OpenStreetMap
+osm-node-11934109023,Ather Grid,15.2649717,73.9599198,,Charging station,operational,OpenStreetMap
+osm-node-11934676233,Charging station #11934676233,28.586642,77.2407912,,Charging station,operational,OpenStreetMap
+osm-node-11936564076,Ather Charging Station,12.9311453,77.6238461,,Charging station,operational,OpenStreetMap
+osm-node-11962153068,Colombierlabs,9.9323551,76.3885362,,Charging station,operational,OpenStreetMap
+osm-node-11964269550,Charging station #11964269550,9.9916932,76.2659936,,Charging station,operational,OpenStreetMap
+osm-node-11964269551,Charging station #11964269551,9.9876654,76.2643992,,Charging station,operational,OpenStreetMap
+osm-node-11964275810,Charging station #11964275810,9.9905715,76.2712145,,Charging station,operational,OpenStreetMap
+osm-node-11964375344,Charging station #11964375344,10.1166661,76.4457594,,Charging station,operational,OpenStreetMap
+osm-node-11964400670,Charging station #11964400670,10.099556,76.3474161,,Charging station,operational,OpenStreetMap
+osm-node-11964404840,Charging station #11964404840,10.0722779,76.3337758,,Charging station,operational,OpenStreetMap
+osm-node-11964404990,EVOK Charging Station,10.0819847,76.3399993,,Charging station,operational,OpenStreetMap
+osm-node-11964409805,Charging station #11964409805,10.0889338,76.4230504,,Charging station,operational,OpenStreetMap
+osm-node-11964604757,Charging station #11964604757,10.0334782,76.2210572,,Charging station,operational,OpenStreetMap
+osm-node-11964630608,Charging station #11964630608,10.0758202,76.2704908,,Charging station,operational,OpenStreetMap
+osm-node-11964642849,Charging station #11964642849,9.9478069,76.31863,,Charging station,operational,OpenStreetMap
+osm-node-11964645149,Charging station #11964645149,9.9774283,76.2774341,,Charging station,operational,OpenStreetMap
+osm-node-11964655417,Charging station #11964655417,9.9768976,76.2777053,,Charging station,operational,OpenStreetMap
+osm-node-11970079921,Charging station #11970079921,10.0187038,76.3131132,,Charging station,operational,OpenStreetMap
+osm-node-11970092378,Charging station #11970092378,10.0628926,76.3211413,,Charging station,operational,OpenStreetMap
+osm-node-11970092379,Charging station #11970092379,10.0348207,76.3230895,,Charging station,operational,OpenStreetMap
+osm-node-11970095292,Charging station #11970095292,10.0463291,76.339378,,Charging station,operational,OpenStreetMap
+osm-node-11970103073,Charging station #11970103073,10.0153299,76.306108,,Charging station,operational,OpenStreetMap
+osm-node-11970115721,Charging station #11970115721,9.993494,76.3274149,,Charging station,operational,OpenStreetMap
+osm-node-11970662648,Charging station #11970662648,10.0208814,76.3447159,,Charging station,operational,OpenStreetMap
+osm-node-11970671706,Charging station #11970671706,10.0324149,76.3364536,,Charging station,operational,OpenStreetMap
+osm-node-11970686660,Charging station #11970686660,10.0231528,76.341238,,Charging station,operational,OpenStreetMap
+osm-node-11970703533,Charging station #11970703533,10.0404762,76.3385796,,Charging station,operational,OpenStreetMap
+osm-node-11970703598,Charging station #11970703598,10.0173589,76.3488958,,Charging station,operational,OpenStreetMap
+osm-node-11970725379,Charging station #11970725379,10.0540834,76.3268137,,Charging station,operational,OpenStreetMap
+osm-node-11970726776,Charging station #11970726776,10.0215768,76.334191,,Charging station,operational,OpenStreetMap
+osm-node-11982372933,One Delhi,28.5964138,77.2935572,,Charging station,operational,OpenStreetMap
+osm-node-11982458750,CESL,28.5964138,77.2935572,,Charging station,operational,OpenStreetMap
+osm-node-11987023859,BluSmart Charging Station,13.1776646,77.6630831,,Charging station,operational,OpenStreetMap
+osm-node-12002046035,Charging station #12002046035,12.977855,77.5812757,,Charging station,operational,OpenStreetMap
+osm-node-12016136802,Charging station #12016136802,13.027001,77.5425776,,Charging station,operational,OpenStreetMap
+osm-node-12031201050,Swap Point,28.5442512,77.264671,,Charging station,operational,OpenStreetMap
+osm-node-12064267225,Charging station #12064267225,28.6382309,77.2873054,,Charging station,operational,OpenStreetMap
+osm-node-12078138004,Charging station #12078138004,12.9810756,77.5966804,,Charging station,operational,OpenStreetMap
+osm-node-12090459397,Zeon,11.3718054,77.647312,120,Charging station,operational,OpenStreetMap
+osm-node-12096869239,Charging station #12096869239,17.9034473,83.4437435,,Charging station,operational,OpenStreetMap
+osm-node-12098546110,Energy Efficiency Services Limited (EESL),28.6316265,77.222004,2,Charging station,operational,OpenStreetMap
+osm-node-12100028686,Honda e:swap,13.0000143,77.5499059,,Charging station,operational,OpenStreetMap
+osm-node-12101733050,Charging station #12101733050,12.965406,77.6002473,,Charging station,operational,OpenStreetMap
+osm-node-12123396312,Charging station #12123396312,28.6952457,77.2153259,,Charging station,operational,OpenStreetMap
+osm-node-12125802596,Honda e:swap,12.9781045,77.6389105,,Charging station,operational,OpenStreetMap
+osm-node-12135600916,Bharat Petroleum,19.9724104,79.2871566,,Charging station,operational,OpenStreetMap
+osm-node-12169023077,Battery Swapping Station,12.8894274,77.5563647,,Charging station,operational,OpenStreetMap
+osm-node-12181413140,Zeon Charging,9.4552131,76.5424575,,Charging station,operational,OpenStreetMap
+osm-node-12183518228,KSEB EV Charging Station,10.7727816,75.9471268,,Charging station,operational,OpenStreetMap
+osm-node-12192527479,Charging station #12192527479,28.5133039,77.1860742,,Charging station,operational,OpenStreetMap
+osm-node-12192684763,Ather charger,12.3323233,78.2138537,,Charging station,operational,OpenStreetMap
+osm-node-12196467738,Charging station #12196467738,28.688648,77.2067275,3,Charging station,operational,OpenStreetMap
+osm-node-12197027554,Ather,10.7702552,76.6377821,,Charging station,operational,OpenStreetMap
+osm-node-12224096371,Charging station #12224096371,10.163392,77.7360648,,Charging station,operational,OpenStreetMap
+osm-node-12327155403,EV Point,10.3806893,76.2975931,,Charging station,operational,OpenStreetMap
+osm-node-12334310661,Charging station #12334310661,18.4979616,73.7941778,,Charging station,operational,OpenStreetMap
+osm-node-12350373268,EV Dock,18.5857921,73.734433,,Charging station,operational,OpenStreetMap
+osm-node-12350440058,Shell,18.5907601,73.7410354,30 kw,Charging station,operational,OpenStreetMap
+osm-node-12350467611,Bijlify,18.5781719,73.7368921,20 kw,Charging station,operational,OpenStreetMap
+osm-node-12352455245,Charging station #12352455245,28.6492602,77.316582,,Charging station,operational,OpenStreetMap
+osm-node-12410120832,ElectriGo,9.9647636,76.2941177,2,Charging station,operational,OpenStreetMap
+osm-node-12431364584,Ather Grid,27.0402782,88.2663931,,Charging station,operational,OpenStreetMap
+osm-node-12432219066,Shell,13.1543775,77.702793,41,Charging station,operational,OpenStreetMap
+osm-node-12439001141,VoltronEV,16.5580075,80.5667983,,Charging station,operational,OpenStreetMap
+osm-node-12450672051,Charging station #12450672051,10.7292683,75.9472621,3,Charging station,operational,OpenStreetMap
+osm-node-12458871181,Statiq,18.5638929,73.8070465,60,Charging station,operational,OpenStreetMap
+osm-node-12468474654,Zeon Charging,12.6245373,80.1977797,22kw,Charging station,operational,OpenStreetMap
+osm-node-12468514473,Minooki Mobility,12.6430987,80.2004767,,DC capable,operational,OpenStreetMap
+osm-node-12468546310,Chargezone,12.6133518,80.1706767,60kw,DC capable,operational,OpenStreetMap
+osm-node-12470580711,Super Hub EV Charging Hub,12.2401178,79.662529,,Charging station,operational,OpenStreetMap
+osm-node-12473454969,Charging station #12473454969,18.5228186,73.8410529,,Charging station,operational,OpenStreetMap
+osm-node-12492566397,Honda e:swap,12.9383537,77.5802162,,Charging station,operational,OpenStreetMap
+osm-node-12492581619,Honda e:swap,12.9217078,77.5805052,,Charging station,operational,OpenStreetMap
+osm-node-12509386001,Electric vehicle charging station,9.9489443,76.3476112,,Charging station,operational,OpenStreetMap
+osm-node-12519643346,Honda e:swap,13.0330528,77.533757,,Charging station,operational,OpenStreetMap
+osm-node-12534145133,Honda e:swap,12.993427,77.7043141,,Charging station,operational,OpenStreetMap
+osm-node-12534184756,Honda e:swap,12.993427,77.7043141,,Charging station,operational,OpenStreetMap
+osm-node-12550935042,Charging station #12550935042,9.9657227,76.2439317,,Charging station,operational,OpenStreetMap
+osm-node-12595513176,Charging station #12595513176,29.1437683,78.2392668,,Charging station,operational,OpenStreetMap
+osm-node-12596454002,Ather energy,25.2815281,83.0032971,3,Charging station,operational,OpenStreetMap
+osm-node-12596574170,Charging station #12596574170,28.6622203,77.3000898,,Charging station,operational,OpenStreetMap
+osm-node-12624560446,Charging station #12624560446,13.0791255,80.261572,60,DC capable,operational,OpenStreetMap
+osm-node-12647193426,Charging station #12647193426,28.5910595,77.0429824,,Charging station,operational,OpenStreetMap
+osm-node-12672890507,Charging station #12672890507,28.5904687,77.2331036,,Charging station,operational,OpenStreetMap
+osm-node-12679343545,Necell,23.2297636,72.6662988,,Charging station,operational,OpenStreetMap
+osm-node-12788139581,Honda e:swap,12.9861844,77.6156891,,Charging station,operational,OpenStreetMap
+osm-node-12791449753,Jio Bp,10.7736633,76.6647262,,Charging station,operational,OpenStreetMap
+osm-node-12793391154,Charging station #12793391154,11.7410487,78.0502782,,Charging station,operational,OpenStreetMap
+osm-node-12811975823,Charging station #12811975823,28.5679245,77.2427016,,Charging station,operational,OpenStreetMap
+osm-node-12823839873,Charging station #12823839873,28.6251684,77.3056013,,Charging station,operational,OpenStreetMap
+osm-node-12828589994,Charging station #12828589994,10.7719508,76.65726,30,Charging station,operational,OpenStreetMap
+osm-node-12864701235,Charging station #12864701235,17.7021023,83.2965766,,Charging station,operational,OpenStreetMap
+osm-node-12880786515,Jio BP Pulse,22.5682609,88.472598,,Charging station,operational,OpenStreetMap
+osm-node-12894372007,Charging station #12894372007,28.6112384,77.2449181,,Charging station,operational,OpenStreetMap
+osm-node-12901933482,Charging station #12901933482,28.5875463,77.226213,,Charging station,operational,OpenStreetMap
+osm-node-12901933483,Charging station #12901933483,28.58752,77.226218,,Charging station,operational,OpenStreetMap
+osm-node-12903526837,Charging station #12903526837,28.5810704,77.2390952,,Charging station,operational,OpenStreetMap
+osm-node-12918480635,Charging station #12918480635,21.22498,79.0819574,1,Charging station,operational,OpenStreetMap
+osm-node-12946107084,Charging station #12946107084,22.4701255,88.309999,,Charging station,operational,OpenStreetMap
+osm-node-12968864355,Charging station #12968864355,13.020096,77.6929133,,Charging station,operational,OpenStreetMap
+osm-node-12972970667,Charging station #12972970667,28.5793023,77.1883978,,Charging station,operational,OpenStreetMap
+osm-node-12973875562,Charging station #12973875562,28.5613597,77.0813217,,Charging station,operational,OpenStreetMap
+osm-node-12982255490,êpump,12.9421168,77.7471967,1,Charging station,operational,OpenStreetMap
+osm-node-12990861171,Charging station #12990861171,17.4943813,78.3499994,1,Charging station,operational,OpenStreetMap
+osm-node-12993620112,Électricité de France,16.5094737,80.7204214,,Charging station,operational,OpenStreetMap
+osm-node-13040660047,Charging station #13040660047,10.5220574,76.2276618,,Charging station,operational,OpenStreetMap
+osm-node-13110034737,Charging station #13110034737,28.6856903,77.205345,,Charging station,operational,OpenStreetMap
+osm-node-13110034738,Charging station #13110034738,28.6857175,77.2053595,,Charging station,operational,OpenStreetMap
+osm-node-13124549208,Charging station #13124549208,26.2382501,72.9525828,,Charging station,operational,OpenStreetMap
+osm-node-13138300765,Charging station #13138300765,26.521324,88.7206674,,Charging station,operational,OpenStreetMap
+osm-node-13152054327,Charging station #13152054327,26.725708,88.415126,,Charging station,operational,OpenStreetMap
+osm-node-13152066443,Charging station #13152066443,26.5715619,88.5404974,,Charging station,operational,OpenStreetMap
+osm-node-13164715323,Charging station #13164715323,29.5247059,77.7195645,,Charging station,operational,OpenStreetMap
+osm-node-13172547338,Charging station #13172547338,23.3712794,85.350754,,Charging station,operational,OpenStreetMap
+osm-node-13198115513,Charging station #13198115513,13.1778318,77.6637027,,Charging station,operational,OpenStreetMap
+osm-node-13208141191,Nuego,17.1658504,79.5216444,,Charging station,operational,OpenStreetMap
+osm-node-13238855163,Charging station #13238855163,12.9662557,76.7885149,,Charging station,operational,OpenStreetMap
+osm-node-13243279486,Charging station #13243279486,28.4600091,77.0956185,2,Charging station,operational,OpenStreetMap
+osm-node-13244932408,Charging station #13244932408,20.002346,75.131832,,Charging station,operational,OpenStreetMap
+osm-node-13245932038,Charging station #13245932038,28.4951713,77.0912527,4,Charging station,operational,OpenStreetMap
+osm-node-13246292161,Charging station #13246292161,19.8655711,75.4208946,,Charging station,operational,OpenStreetMap
+osm-node-13246305030,Charging station #13246305030,19.8690962,75.6074145,,Charging station,operational,OpenStreetMap
+osm-node-13246707689,Mercedes-Benz,28.4601725,77.0956771,4,Charging station,operational,OpenStreetMap
+osm-node-13249124236,Exiom Charging Station,10.7731122,76.2794738,,Charging station,operational,OpenStreetMap
+osm-node-13276174617,Charging station #13276174617,9.0712255,76.8561732,,Charging station,operational,OpenStreetMap
+osm-node-13277046524,Honda e:swap,13.0235213,77.5497316,12,Charging station,operational,OpenStreetMap
+osm-node-13277046525,Honda e:swap,13.0235317,77.5497115,12,Charging station,operational,OpenStreetMap
+osm-node-13289292621,Charging station #13289292621,13.1824621,77.6738012,2,Charging station,operational,OpenStreetMap
+osm-node-13289292622,Charging station #13289292622,13.1842301,77.6808688,,Charging station,operational,OpenStreetMap
+osm-node-13294609048,Charging station #13294609048,28.587169,77.2413624,,Charging station,operational,OpenStreetMap
+osm-node-13300936973,Charging station #13300936973,28.4952305,77.0880137,2,Charging station,operational,OpenStreetMap
+osm-node-13314245144,Tata power,17.7000535,83.3029208,4,Charging station,operational,OpenStreetMap
+osm-node-13351067902,Charging station #13351067902,28.6185254,77.2871601,,Charging station,operational,OpenStreetMap
+osm-node-13442312863,Charging station #13442312863,26.535092,88.6902787,,Charging station,operational,OpenStreetMap
+osm-node-13506982427,Ather Grid Charging station,19.3242434,84.8749989,3,Charging station,operational,OpenStreetMap
+osm-node-13516555501,ചാർജ് മോഡ്,9.2814528,76.4549754,,Charging station,operational,OpenStreetMap
+osm-node-13537485378,Ather Grid 6kW,20.2965484,85.8246467,6,Charging station,operational,OpenStreetMap
+osm-node-13556517113,EZYGO,10.7844884,76.6561304,60,Charging station,operational,OpenStreetMap
+osm-node-13566426890,Sun Mobility,13.0001758,77.6869647,,Charging station,operational,OpenStreetMap
+osm-node-13586349702,EVOK ( Electric Vehicle Owners Kerala ),10.4315979,76.1424753,,Charging station,operational,OpenStreetMap
+osm-node-13589225004,Hyundai EV Charging Station,12.3574005,78.4346233,2,Charging station,operational,OpenStreetMap
+osm-node-13593376578,Charging station #13593376578,9.490134,76.3203607,,Charging station,operational,OpenStreetMap
+osm-node-13609193888,Charging station #13609193888,10.1168975,76.4870945,,DC capable,operational,OpenStreetMap
+osm-node-13619600201,Charging station #13619600201,13.0433272,80.273731,,Charging station,operational,OpenStreetMap
+osm-node-13624573647,Charging station #13624573647,28.5564985,77.2326653,1,DC capable,operational,OpenStreetMap
+osm-node-13624573656,Charging station #13624573656,28.5564627,77.2326631,1,DC capable,operational,OpenStreetMap
+osm-node-13625197611,Charging station #13625197611,12.765215,77.3303554,,Charging station,operational,OpenStreetMap
+osm-node-13626520058,Charging station #13626520058,26.7700686,88.3785356,,Charging station,operational,OpenStreetMap
+osm-node-13629431945,Charging station #13629431945,18.9048855,72.8046553,,Charging station,operational,OpenStreetMap
+osm-node-13632992904,Charging station #13632992904,28.6253953,77.2332995,,Charging station,operational,OpenStreetMap
+osm-node-13632992905,Charging station #13632992905,28.625397,77.2331692,,Charging station,operational,OpenStreetMap
+osm-node-13633628620,Charging station #13633628620,28.6915005,77.2092134,,Charging station,operational,OpenStreetMap
+osm-node-13639965597,tata power,17.7000601,83.3029199,4,Charging station,operational,OpenStreetMap
+osm-node-13639989058,Charging station #13639989058,17.6935649,83.2922641,,Charging station,operational,OpenStreetMap
+osm-node-13639995467,ather energy,18.0801417,83.3855754,type2,Charging station,operational,OpenStreetMap
+osm-node-13640015379,tata power,17.7106183,83.3011869,5,Charging station,operational,OpenStreetMap
+osm-node-13640131586,Charging station #13640131586,18.0390176,83.4064333,,Charging station,operational,OpenStreetMap
+osm-node-13640131587,rama chandra agencies,18.0390223,83.4064315,type120kw,Charging station,operational,OpenStreetMap
+osm-node-13640142200,ather energy,18.2791114,83.5249789,,Charging station,operational,OpenStreetMap
+osm-node-13640389831,Zeon,17.7269954,83.3071947,20,Charging station,operational,OpenStreetMap
+osm-node-13640768575,EVRE,16.5112068,80.6188172,20,Charging station,operational,OpenStreetMap
+osm-node-13640776732,Ather grid,16.5071595,80.6158933,50,Charging station,operational,OpenStreetMap
+osm-node-13668832204,Charging station #13668832204,26.9451215,70.889677,,Charging station,operational,OpenStreetMap
+osm-node-13688377301,Tesla Supercharger,28.5515313,77.1218893,,Charging station,operational,OpenStreetMap
+osm-node-13688377501,Tesla Supercharger,28.42597,77.0368971,4,Charging station,operational,OpenStreetMap
+osm-node-13688398004,Charging station #13688398004,28.5515415,77.121598,,Charging station,operational,OpenStreetMap
+osm-node-13688398203,Charging station #13688398203,28.4261625,77.0367783,,Charging station,operational,OpenStreetMap
+osm-node-13737444601,Infopark,10.0083095,76.3647003,,Charging station,operational,OpenStreetMap
+osm-node-13746020730,Charging station #13746020730,28.5694639,77.2044503,,Charging station,operational,OpenStreetMap
+osm-node-13746020743,Charging station #13746020743,28.5466296,77.1950119,,Charging station,operational,OpenStreetMap
+osm-node-13757728976,Charging station #13757728976,28.5805655,77.1796965,,Charging station,operational,OpenStreetMap
+osm-node-13775144001,Zeon,11.4470857,77.7453537,,Charging station,operational,OpenStreetMap
+osm-node-13775144101,Zeon,11.4469901,77.7451856,,Charging station,operational,OpenStreetMap
+osm-node-13775144302,Ather Grid,11.4470328,77.7453455,,Charging station,operational,OpenStreetMap
+osm-node-13786947403,Charging station #13786947403,17.2296337,74.4013203,1,Charging station,operational,OpenStreetMap
+osm-node-13800324487,Charging station #13800324487,28.5962686,77.2046077,,Charging station,operational,OpenStreetMap
+osm-node-13805934243,Uplug,16.9460013,74.4053945,60,Charging station,operational,OpenStreetMap
+osm-node-13805934247,Charging station #13805934247,16.9460728,74.4053213,,Charging station,operational,OpenStreetMap
+osm-node-13807361239,Charging station #13807361239,28.5805088,77.1793725,,Charging station,operational,OpenStreetMap
+osm-node-13820100532,Charging station #13820100532,28.5592932,77.232144,,Charging station,operational,OpenStreetMap
+osm-node-13821901602,Shri Datt Smart EV Charging Station,24.1342185,72.4086733,,Charging station,operational,OpenStreetMap
+osm-node-13857810662,Bharat Petroleum,12.1640693,79.6113871,,Charging station,operational,OpenStreetMap
+osm-node-13864933927,Charging station #13864933927,15.1124745,74.0356876,,Charging station,operational,OpenStreetMap
+osm-node-13890311968,IGL EV charging station,28.5899305,77.229278,,Charging station,operational,OpenStreetMap
+osm-node-13913881928,Charging station #13913881928,22.7217837,75.8363276,,Charging station,operational,OpenStreetMap
+osm-node-13917513464,Charging station #13917513464,22.7157725,75.8759735,,Charging station,operational,OpenStreetMap
+osm-node-13917515273,Charging station #13917515273,22.7251301,75.8816036,,Charging station,operational,OpenStreetMap
+osm-node-13919645475,Charging station #13919645475,23.1027843,76.8760406,,Charging station,operational,OpenStreetMap
+osm-node-13931872808,Charging station #13931872808,28.5641298,77.333309,,Charging station,operational,OpenStreetMap
+osm-node-13952066560,Charging station #13952066560,27.5495366,77.7557237,,Charging station,operational,OpenStreetMap
+osm-node-13952067947,Charging station #13952067947,27.5495279,77.7553038,1,Charging station,operational,OpenStreetMap
+osm-node-13955464891,Tata,28.3190968,77.5517525,6,Charging station,operational,OpenStreetMap
+osm-node-13955495821,Charging station #13955495821,28.3189147,77.5515785,1,Charging station,operational,OpenStreetMap
+osm-node-13957568498,Charging station #13957568498,27.203849,78.1141208,,Charging station,operational,OpenStreetMap
+osm-node-13961992931,Charging station #13961992931,27.0572006,78.2727739,,Charging station,operational,OpenStreetMap
+osm-node-13962501791,Charging station #13962501791,10.0355871,76.3364986,30,Charging station,operational,OpenStreetMap
+osm-node-13969467531,Charging station #13969467531,28.5698471,77.1852904,,Charging station,operational,OpenStreetMap
+osm-node-13969467543,Charging station #13969467543,28.5694049,77.1651098,,Charging station,operational,OpenStreetMap
+osm-node-13969665737,EV Charging,11.941349,79.7969919,,Charging station,operational,OpenStreetMap
+osm-node-13982741917,Charging station #13982741917,28.5610466,77.2312484,,Charging station,operational,OpenStreetMap
+osm-node-13982895901,Switch Delhi,28.576123,77.069508,,Charging station,operational,OpenStreetMap
+osm-node-13990548253,Charging station #13990548253,8.578671,76.8662104,,Charging station,operational,OpenStreetMap
+osm-node-13992548532,Zeon,10.5126417,76.2589869,,Charging station,operational,OpenStreetMap
+osm-node-13995333421,EV charging station,10.0854803,78.794014,,Charging station,operational,OpenStreetMap
+osm-node-13996697111,Charging station #13996697111,12.040732,92.9832015,,Charging station,operational,OpenStreetMap
+osm-node-13997229280,Maha,8.4343849,77.0271035,,Charging station,operational,OpenStreetMap
+osm-node-13997784674,Charging station #13997784674,28.5688051,77.2214679,,Charging station,operational,OpenStreetMap
+osm-node-13999844990,Charging station #13999844990,28.5686034,77.2195292,,Charging station,operational,OpenStreetMap
+osm-node-13999844996,Charging station #13999844996,28.5686067,77.2204883,,Charging station,operational,OpenStreetMap
+osm-node-14000305693,Plug pe,10.089479,78.794115,2,Charging station,operational,OpenStreetMap
+osm-node-14000325470,Ather,10.2405182,76.3735427,,Charging station,operational,OpenStreetMap
+osm-node-14000397140,GO EC,10.0323811,76.3233259,,Charging station,operational,OpenStreetMap
+osm-node-14000450128,Charging station #14000450128,10.0320751,76.323341,,Charging station,operational,OpenStreetMap
+osm-node-14001726782,vida charging station,11.0540118,77.0145419,2,Charging station,operational,OpenStreetMap
+osm-node-14002814701,Charging station #14002814701,11.2408331,75.8019461,,Charging station,operational,OpenStreetMap
+osm-node-14005707553,Yash Square GOEC Electric Vehicle (Car) Charging Station 2x60 KW CCS2,10.1105981,76.3727711,,Charging station,operational,OpenStreetMap
+osm-node-14016861905,Charging station #14016861905,28.584619,77.2204289,,Charging station,operational,OpenStreetMap
+osm-node-14017165298,Charging station #14017165298,28.5680604,77.2235189,2,Charging station,operational,OpenStreetMap
+osm-node-14017179737,Charging station #14017179737,28.5827644,77.2511763,,Charging station,operational,OpenStreetMap
+osm-node-14017179749,Charging station #14017179749,28.5838252,77.2502725,,Charging station,operational,OpenStreetMap
+osm-node-14017179796,Charging station #14017179796,28.564806,77.2400299,,Charging station,operational,OpenStreetMap
+osm-node-14017751400,Charging station #14017751400,28.5719035,77.2578799,,Charging station,operational,OpenStreetMap
+osm-node-14017793416,Charging station #14017793416,28.5685539,77.2207569,,Charging station,operational,OpenStreetMap
+osm-node-14027946995,Ather Grid Charging station,11.0792591,77.0027863,2,Charging station,operational,OpenStreetMap
+osm-node-14028005231,Ather Grid Charging station,11.074846,77.0080344,3.3,Charging station,operational,OpenStreetMap
+osm-node-14028012667,Ather Grid Charging station,11.0957151,77.0154671,2,Charging station,operational,OpenStreetMap
+osm-node-14028047524,Ather Grid Charging station,11.0809332,76.9933971,2,Charging station,operational,OpenStreetMap
+osm-node-14028054151,Ather Grid Charging station,11.0733347,76.9852954,2,Charging station,operational,OpenStreetMap
+osm-node-14028521564,Ather Grid Charging station,11.0250065,77.011191,2,Charging station,operational,OpenStreetMap
+osm-node-14028540743,vida charging station,11.0253086,76.9788275,2,Charging station,operational,OpenStreetMap
+osm-node-14029112723,Charging station #14029112723,28.5805091,77.2209605,,Charging station,operational,OpenStreetMap
+osm-node-14038442342,Ather Grid Charging station,11.0462531,76.9468752,1,Charging station,operational,OpenStreetMap
+osm-node-14046155283,Charging station #14046155283,28.5597846,77.1745787,,Charging station,operational,OpenStreetMap
+osm-node-14047497970,Charging station #14047497970,13.071801,80.2223305,1,Charging station,operational,OpenStreetMap
+osm-node-14058615793,Charging station #14058615793,11.1658867,76.9492139,2,Charging station,operational,OpenStreetMap
+osm-node-14058958230,Charging station #14058958230,28.6938836,77.2093354,,Charging station,operational,OpenStreetMap
+osm-node-14058958254,Charging station #14058958254,28.6914839,77.2092722,,Charging station,operational,OpenStreetMap
+osm-node-14058958262,Charging station #14058958262,28.6914946,77.2092346,,Charging station,operational,OpenStreetMap
+osm-node-14058958287,Charging station #14058958287,28.6914877,77.2092591,,Charging station,operational,OpenStreetMap
+osm-node-14058958324,Charging station #14058958324,28.6914752,77.2092831,,Charging station,operational,OpenStreetMap
+osm-node-14059886602,BPCL Charging Station,13.0979111,80.2384469,,Charging station,operational,OpenStreetMap
+osm-node-14063411321,Chargezone EV Charging,12.5894797,78.1435604,2,Charging station,operational,OpenStreetMap
+osm-node-14066036841,Charging station #14066036841,28.5723516,77.1802808,,Charging station,operational,OpenStreetMap
+osm-node-14067934164,Charging station #14067934164,11.2831841,76.9708429,2,DC capable,operational,OpenStreetMap
+osm-node-14072658776,Charging station #14072658776,23.2620619,87.8391376,,Charging station,operational,OpenStreetMap
+osm-node-14073868040,Ather Grid Charging station,11.0366665,76.9275036,2,Charging station,operational,OpenStreetMap
+osm-node-14074085866,Tata Power EV Charging,28.5947709,77.1333487,30,Charging station,operational,OpenStreetMap
+osm-node-14074469426,Hyundai Hotel Arabian Station,11.2265873,76.9594139,2,Charging station,operational,OpenStreetMap
+osm-node-14074469427,Ather Grid Charging station,11.2266184,76.9596876,1,Charging station,operational,OpenStreetMap
+osm-node-14074612257,Charging station #14074612257,28.6890231,77.2070216,,Charging station,operational,OpenStreetMap
+osm-node-14078531523,vida charging station MRG hero,11.0324857,76.9779353,2,Charging station,operational,OpenStreetMap
+osm-node-14081555701,Jio BP Pulse,16.9357078,75.7391642,,Charging station,operational,OpenStreetMap
+osm-node-14081749954,Charging station #14081749954,17.595456,76.0655753,,Charging station,operational,OpenStreetMap
+osm-node-14090981021,Charging station #14090981021,11.2473846,76.9565426,2,DC capable,operational,OpenStreetMap
+osm-node-14091005515,Charging station #14091005515,11.1133057,76.9353761,2,DC capable,operational,OpenStreetMap
+osm-node-14094178511,Charging station #14094178511,28.693914,77.2183933,,Charging station,operational,OpenStreetMap
+osm-node-14094459866,Charging station #14094459866,28.5584955,77.2393014,,Charging station,operational,OpenStreetMap
+osm-node-14096406876,Chargezone EV Charging (Gentari),12.5701391,78.1725206,,Charging station,operational,OpenStreetMap
+osm-node-14096682501,Tata Power Charging Station,27.5725047,75.1491202,,Charging station,operational,OpenStreetMap
+osm-node-14096683901,Electric Vehicle Charging Station,27.5721525,75.1496179,,Charging station,operational,OpenStreetMap
+osm-node-14100919780,Charging station #14100919780,28.5688941,77.2194753,,Charging station,operational,OpenStreetMap
+osm-node-14100919787,Charging station #14100919787,28.5680283,77.2200938,2,Charging station,operational,OpenStreetMap
+osm-node-14100954403,Charging station #14100954403,28.5579483,77.1868818,,Charging station,operational,OpenStreetMap
+osm-node-14100954447,Charging station #14100954447,28.5611893,77.1880625,,Charging station,operational,OpenStreetMap
+osm-node-14100954555,Charging station #14100954555,28.556706,77.1864405,,Charging station,operational,OpenStreetMap
+osm-node-14101571501,TATA power,23.2813742,72.7596099,,Charging station,operational,OpenStreetMap
+osm-node-14101585227,Charging station #14101585227,28.5556409,77.1765669,,Charging station,operational,OpenStreetMap
+osm-node-14101585231,Charging station #14101585231,28.5422697,77.2272712,,Charging station,operational,OpenStreetMap
+osm-node-14101585246,Charging station #14101585246,28.5439827,77.2045958,,Charging station,operational,OpenStreetMap
+osm-node-14101585269,Charging station #14101585269,28.5663604,77.1663358,,Charging station,operational,OpenStreetMap
+osm-node-14101585281,Charging station #14101585281,28.5459239,77.1970866,,Charging station,operational,OpenStreetMap
+osm-node-14101585294,Charging station #14101585294,28.5600235,77.1708457,,Charging station,operational,OpenStreetMap
+osm-node-14106405348,Charging station #14106405348,28.6183593,77.2871019,,Charging station,operational,OpenStreetMap
+osm-node-14107361746,Charging station #14107361746,15.283211,76.3868679,,Charging station,operational,OpenStreetMap
+osm-node-14110771703,Charging station #14110771703,17.7216493,83.307115,,Charging station,operational,OpenStreetMap
+osm-node-14114661618,Charging station #14114661618,15.3626357,75.2130756,,Charging station,operational,OpenStreetMap
+osm-node-14115719957,Charging station #14115719957,28.6883428,77.2211638,,Charging station,operational,OpenStreetMap
+osm-node-14115719958,Charging station #14115719958,28.6883767,77.2211596,,Charging station,operational,OpenStreetMap
+osm-node-14115719961,Charging station #14115719961,28.6884319,77.2211588,,Charging station,operational,OpenStreetMap
+osm-node-14127552402,ചാർജമോഡ് ഇവി ചാർജിങ് സ്റ്റേഷൻ,9.3143146,76.4290674,,Charging station,operational,OpenStreetMap
+osm-node-14131315924,Charging station #14131315924,28.5592915,77.2361389,,Charging station,operational,OpenStreetMap
+osm-node-14133758030,Charging station #14133758030,12.5820463,78.1571461,,Charging station,operational,OpenStreetMap
+osm-way-359699641,Charging station #359699641,18.5912547,73.7488124,,Charging station,operational,OpenStreetMap
+osm-way-360242628,Charging station #360242628,18.5882782,73.784882,1,Charging station,operational,OpenStreetMap
+osm-way-639223862,Charging station #639223862,9.4254744,76.3467396,,Charging station,operational,OpenStreetMap
+osm-way-1097173824,Charging station #1097173824,25.4161544,81.862514,,Charging station,operational,OpenStreetMap
+osm-way-1150511285,Shell,12.9725414,77.7078105,4,Charging station,operational,OpenStreetMap
+osm-way-1150599656,Charging station #1150599656,26.5099261,80.2407412,,Charging station,operational,OpenStreetMap
+osm-way-1152420782,Tata Power,18.6165794,73.7476226,2,Charging station,operational,OpenStreetMap
+osm-way-1152421163,Charging station #1152421163,18.6234031,73.7454767,2,Charging station,operational,OpenStreetMap
+osm-way-1152424877,Charging station #1152424877,18.5994671,73.7807696,1,Charging station,operational,OpenStreetMap
+osm-way-1152427340,Charging station #1152427340,18.5807735,73.8158088,1,Charging station,operational,OpenStreetMap
+osm-way-1198553894,Government,8.5086606,76.9460986,,Charging station,operational,OpenStreetMap
+osm-way-1200990773,Charging station #1200990773,28.5888756,77.2530636,4,Charging station,operational,OpenStreetMap
+osm-way-1215901273,KSEB,9.9629214,76.319215,4,Charging station,operational,OpenStreetMap
+osm-way-1217492370,Charging station #1217492370,9.632726,76.5244079,,Charging station,operational,OpenStreetMap
+osm-way-1221529119,Shell EV Charging Station,18.4571766,73.8053923,,Charging station,operational,OpenStreetMap
+osm-way-1222357597,Charging station #1222357597,18.5794696,73.73858,7,Charging station,operational,OpenStreetMap
+osm-way-1230812469,Charging station #1230812469,28.6250807,77.3055103,,Charging station,operational,OpenStreetMap
+osm-way-1231361851,KSEB,10.0159012,76.5651977,100,Charging station,operational,OpenStreetMap
+osm-way-1250660872,O S Overseas,18.4926136,73.9990571,,Charging station,operational,OpenStreetMap
+osm-way-1299079174,Charging station #1299079174,17.4048114,78.3333396,,Charging station,operational,OpenStreetMap
+osm-way-1318570394,Charging station #1318570394,28.5658947,77.2488941,,Charging station,operational,OpenStreetMap
+osm-way-1334165085,Jio BP,12.9517505,77.7024581,,Charging station,operational,OpenStreetMap
+osm-way-1353053241,Jio BP,13.0878799,77.6601841,,Charging station,operational,OpenStreetMap
+osm-way-1354947073,Charging station #1354947073,10.1229471,76.3407691,,Charging station,operational,OpenStreetMap
+osm-way-1362135033,Kerala State Electricity Board,9.5428922,76.5141398,,Charging station,operational,OpenStreetMap
+osm-way-1362820338,Urja Charging Station,13.0089749,74.7937015,5,Charging station,operational,OpenStreetMap
+osm-way-1385715146,ChargeZone,22.3327298,73.2163384,2,Charging station,operational,OpenStreetMap
+osm-way-1385850870,Charging station #1385850870,22.3247522,73.17047,60,DC capable,operational,OpenStreetMap
+osm-way-1387453961,Kerala State Electricity Board,10.6327721,76.0857412,,Charging station,operational,OpenStreetMap
+osm-way-1388052885,Kerala State Electricity Board,10.6571627,76.2605525,,Charging station,operational,OpenStreetMap
+osm-way-1412674423,EESL,9.6338224,76.3336829,,Charging station,operational,OpenStreetMap
+osm-way-1428252016,Charging station #1428252016,30.3245543,78.041805,,Charging station,operational,OpenStreetMap
+osm-way-1453071780,BESCOM,13.1831753,77.6792437,,Charging station,operational,OpenStreetMap
+osm-way-1476227828,Nashik Municipal Corporation,19.9730341,73.72786,,Charging station,operational,OpenStreetMap
+osm-way-1478610222,Charj Karo,28.6335149,77.216504,,Charging station,operational,OpenStreetMap
+osm-way-1491010012,Bolt Earth,12.9284786,77.7459842,,Charging station,operational,OpenStreetMap
+osm-way-1491224554,Bolt Earth,12.9301172,77.7442461,,Charging station,operational,OpenStreetMap
+osm-way-1491224555,Bolt Earth,12.9321299,77.7463558,,Charging station,operational,OpenStreetMap
+osm-way-1496159597,Kerala State Electricity Board,11.4440948,75.9558235,,Charging station,operational,OpenStreetMap
+osm-way-1510242804,Uplug,16.9459866,74.4053918,60,Charging station,operational,OpenStreetMap
+osm-way-1528697596,Charging station #1528697596,28.5745564,77.3554084,,Charging station,operational,OpenStreetMap
+osm-way-1531209911,Shell,12.9221172,80.1654923,,Charging station,operational,OpenStreetMap
+osm-way-1536737974,Charging station #1536737974,8.5104241,76.8972637,,Charging station,operational,OpenStreetMap
+osm-relation-20357586,Bolt Earth,12.9293344,77.7448798,,Charging station,operational,OpenStreetMap
