@@ -7,7 +7,7 @@ from datetime import datetime
 import pandas as pd
 import requests
 import streamlit as st
-import streamlit.components.v1 as components
+from streamlit_geolocation import streamlit_geolocation
 
 
 SEARCH_RADIUS_KM = 50
@@ -25,10 +25,6 @@ ROUTING_URLS = [
 ]
 GOOGLE_ROUTES_URL = "https://routes.googleapis.com/directions/v2:computeRoutes"
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
-GPS_COMPONENT = components.declare_component(
-    "chargeflow_gps",
-    path=os.path.join(os.path.dirname(__file__), "gps_component"),
-)
 EV_MODELS = [
     "Ather 450X",
     "Ather 450S",
@@ -432,8 +428,8 @@ with st.container(border=True):
     gps_latitude = None
     gps_longitude = None
     if location_method == "Use GPS":
-        st.info("Click Get my location and allow browser location access.")
-        gps_location = GPS_COMPONENT(key="gps_location", default=None)
+        st.info("Click the location icon below and allow browser location access.")
+        gps_location = streamlit_geolocation()
         gps_latitude = gps_location.get("latitude") if gps_location else None
         gps_longitude = gps_location.get("longitude") if gps_location else None
         if gps_latitude is not None and gps_longitude is not None:
