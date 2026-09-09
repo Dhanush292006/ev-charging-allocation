@@ -428,6 +428,7 @@ with st.container(border=True):
     gps_latitude = None
     gps_longitude = None
     if location_method == "Use GPS":
+        st.info("Click the location button below and allow browser location access.")
         gps_location = streamlit_geolocation()
         gps_latitude = gps_location.get("latitude") if gps_location else None
         gps_longitude = gps_location.get("longitude") if gps_location else None
@@ -441,6 +442,8 @@ with st.container(border=True):
                 f"GPS location detected near {location_name}: latitude {gps_latitude:.6f}, "
                 f"longitude {gps_longitude:.6f}"
             )
+        else:
+            st.warning("Waiting for GPS. Click the location button above to request your position.")
     second_row = st.columns(3)
     with second_row[0]:
         battery_level = st.slider("Current battery", 5, 100, 24, format="%d%%")
