@@ -67,7 +67,7 @@ function renderStations() {
   stationList.innerHTML = rankedStations.map((station, index) => `
     <article class="station-card ${index === 0 ? 'recommended' : ''}">
       <div class="station-name"><span class="station-badge">⚡</span><div><strong>${station.name}${index === 0 ? '<span class="recommended-label">Best match</span>' : ''}</strong><small>${station.type} · ${station.congestion} traffic</small></div></div>
-      <div class="station-metric"><span>Road distance</span><strong>${station.distance.toFixed(1)} km</strong></div>
+      <div class="station-metric"><span>OSRM road distance</span><strong>${station.distance.toFixed(1)} km</strong></div>
       <div class="station-metric"><span>Latitude</span><strong>${station.lat.toFixed(5)}</strong></div>
       <div class="station-metric"><span>Longitude</span><strong>${station.lon.toFixed(5)}</strong></div>
       <div class="station-metric availability"><span>Reported capacity</span><strong>${station.capacity ? `${station.capacity} connectors` : 'Not listed'}</strong></div>
@@ -173,7 +173,7 @@ async function loadLiveNetwork(location) {
     document.querySelector('#station-count').textContent = stations.length;
     document.querySelector('#charger-data-count').textContent = stations.filter((station) => station.capacity).length;
     document.querySelector('#network-area').textContent = 'within 50 km of you';
-    networkStatus.textContent = `${stations[0]?.source || 'Live map'} · updated ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    networkStatus.textContent = `${stations[0]?.source || 'Live map'} · OSRM distances · updated ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     renderStations();
   } catch (error) {
     stations = [];
