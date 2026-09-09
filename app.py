@@ -7,7 +7,7 @@ from datetime import datetime
 import pandas as pd
 import requests
 import streamlit as st
-from streamlit_geolocation import streamlit_geolocation
+import streamlit.components.v1 as components
 
 
 SEARCH_RADIUS_KM = 50
@@ -25,6 +25,10 @@ ROUTING_URLS = [
 ]
 GOOGLE_ROUTES_URL = "https://routes.googleapis.com/directions/v2:computeRoutes"
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+GPS_COMPONENT = components.declare_component(
+    "chargeflow_gps",
+    path=os.path.join(os.path.dirname(__file__), "gps_component"),
+)
 EV_MODELS = [
     "Ather 450X",
     "Ather 450S",
@@ -428,8 +432,8 @@ with st.container(border=True):
     gps_latitude = None
     gps_longitude = None
     if location_method == "Use GPS":
-        st.info("Click the location button below and allow browser location access.")
-        gps_location = streamlit_geolocation()
+        st.info("Click Get my location and allow browser location access.")
+        gps_location = GPS_COMPONENT(key="gps_location", default=None)
         gps_latitude = gps_location.get("latitude") if gps_location else None
         gps_longitude = gps_location.get("longitude") if gps_location else None
         if gps_latitude is not None and gps_longitude is not None:
@@ -442,8 +446,10 @@ with st.container(border=True):
                 f"GPS location detected near {location_name}: latitude {gps_latitude:.6f}, "
                 f"longitude {gps_longitude:.6f}"
             )
+        elif gps_location and gps_location.get("error"):
+            st.error(gps_location["error"])
         else:
-            st.warning("Waiting for GPS. Click the location button above to request your position.")
+            st.warning("Waiting for GPS. Click Get my location above to request your position.")
     second_row = st.columns(3)
     with second_row[0]:
         battery_level = st.slider("Current battery", 5, 100, 24, format="%d%%")
