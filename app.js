@@ -1,4 +1,4 @@
-const SEARCH_RADIUS_METERS = 50000;
+const DEFAULT_SEARCH_RADIUS_KM = 50;
 let stations = [];
 let currentLocation = null;
 let allocatedStation = null;
@@ -17,6 +17,8 @@ const locationStatus = document.querySelector('#location-status');
 const locationCoordinates = document.querySelector('#location-coordinates');
 const manualLatitude = document.querySelector('#manual-latitude');
 const manualLongitude = document.querySelector('#manual-longitude');
+const searchRadius = document.querySelector('#search-radius');
+const searchRadiusSummary = document.querySelector('#search-radius-summary');
 const networkStatus = document.querySelector('#network-status');
 const otpOutput = document.querySelector('#reservation-otp');
 const smsStatus = document.querySelector('#sms-status');
@@ -61,7 +63,7 @@ function gpsDistanceKm(firstLatitude, firstLongitude, secondLatitude, secondLong
 function renderStations() {
   const rankedStations = scoreStations(Number(battery.value));
   if (!rankedStations.length) {
-    stationList.innerHTML = '<div class="empty-results">No charging stations were found within 50 km. Try locating again.</div>';
+    stationList.innerHTML = `<div class="empty-results">No charging stations were found within ${searchRadius.value} km. Try locating again.</div>`;
     return;
   }
   stationList.innerHTML = rankedStations.map((station, index) => `
@@ -92,8 +94,9 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 12000) {
   }
 }
 
-async function fetchStations(location) {
-  const openChargeMapUrl = `https://api.openchargemap.io/v3/poi/?output=json&latitude=${location.lat}&longitude=${location.lon}&distance=50&distanceunit=KM&maxresults=50&compact=true`;
+async function fetchStations(location, radiusKm) {
+  const radiusMeters = radiusKm * 1000;
+  const openChargeMapUrl = `https://api.openchargemap.io/v3/poi/?output=json&latitude=${location.lat}&longitude=${location.lon}&distance=${radiusKm}&distanceunit=KM&maxresults=50&compact=true`;
   try {
     const response = await fetchWithTimeout(openChargeMapUrl);
     if (!response.ok) throw new Error('Open Charge Map unavailable');
@@ -120,7 +123,7 @@ async function fetchStations(location) {
     console.warn('Open Charge Map request failed; trying OpenStreetMap', error);
   }
 
-  const query = `[out:json][timeout:20];nwr[amenity=charging_station](around:${SEARCH_RADIUS_METERS},${location.lat},${location.lon});out center tags;`;
+  const query = `[out:json][timeout:20];nwr[amenity=charging_station](around:${radiusMeters},${location.lat},${location.lon});out center tags;`;
   const response = await fetchWithTimeout('https://overpass-api.de/api/interpreter', {
     method: 'POST',
     body: query,
@@ -139,10 +142,10 @@ async function fetchStations(location) {
   }).filter((station) => station && !['planned', 'construction', 'disused', 'closed', 'abandoned'].includes(station.status.toLowerCase()));
 }
 
-async function addRoadData(foundStations, location) {
+async function addRoadData(foundStations, location, radiusKm) {
   const nearbyStations = foundStations
     .map((station) => ({ ...station, gpsDistance: gpsDistanceKm(location.lat, location.lon, station.lat, station.lon) }))
-    .filter((station) => station.gpsDistance <= SEARCH_RADIUS_METERS / 1000)
+    .filter((station) => station.gpsDistance <= radiusKm)
     .sort((first, second) => first.gpsDistance - second.gpsDistance)
     .slice(0, 12);
   return Promise.all(nearbyStations.map(async (station) => {
@@ -151,7 +154,7 @@ async function addRoadData(foundStations, location) {
       const route = await routeResponse.json();
       if (route.code !== 'Ok') throw new Error('No route');
       const roadDistanceKm = route.routes[0].distance / 1000;
-      if (!Number.isFinite(roadDistanceKm) || roadDistanceKm < station.gpsDistance - 0.05 || roadDistanceKm > SEARCH_RADIUS_METERS / 1000) {
+      if (!Number.isFinite(roadDistanceKm) || roadDistanceKm < station.gpsDistance - 0.05 || roadDistanceKm > radiusKm) {
         return null;
       }
       return { ...station, distance: roadDistanceKm, eta: Math.max(1, Math.round(route.routes[0].duration / 60)) };
@@ -161,18 +164,18 @@ async function addRoadData(foundStations, location) {
   })).then((items) => items.filter(Boolean));
 }
 
-async function loadLiveNetwork(location) {
+async function loadLiveNetwork(location, radiusKm = DEFAULT_SEARCH_RADIUS_KM) {
   currentLocation = location;
   locationName.textContent = location.label;
   locationStatus.textContent = 'GPS location · live map data';
   networkStatus.textContent = 'Loading live station and route data...';
   try {
-    const foundStations = await fetchStations(location);
-    stations = await addRoadData(foundStations, location);
+    const foundStations = await fetchStations(location, radiusKm);
+    stations = await addRoadData(foundStations, location, radiusKm);
     stations.sort((a, b) => a.distance - b.distance);
     document.querySelector('#station-count').textContent = stations.length;
     document.querySelector('#charger-data-count').textContent = stations.filter((station) => station.capacity).length;
-    document.querySelector('#network-area').textContent = 'within 50 km of you';
+    document.querySelector('#network-area').textContent = `within ${radiusKm} km of you`;
     networkStatus.textContent = `${stations[0]?.source || 'Live map'} · OSRM distances · updated ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     renderStations();
   } catch (error) {
@@ -224,7 +227,7 @@ function locateUser() {
     manualLatitude.value = location.lat.toFixed(6);
     manualLongitude.value = location.lon.toFixed(6);
     locationStatus.textContent = `Fresh GPS fix · accuracy ±${accuracy} m`;
-    await loadLiveNetwork(location);
+    await loadLiveNetwork(location, Number(searchRadius.value) || DEFAULT_SEARCH_RADIUS_KM);
   }, (error) => {
     locationName.textContent = error.code === 1 ? 'Location permission denied' : 'Location unavailable';
     locationStatus.textContent = error.code === 1
@@ -247,7 +250,7 @@ document.querySelector('#use-coordinates').addEventListener('click', async () =>
   locationName.textContent = 'Entered location';
   locationCoordinates.textContent = `Latitude ${lat.toFixed(6)} · Longitude ${lon.toFixed(6)}`;
   locationStatus.textContent = 'Using entered coordinates';
-  await loadLiveNetwork(location);
+  await loadLiveNetwork(location, Number(searchRadius.value) || DEFAULT_SEARCH_RADIUS_KM);
 });
 
 function reserveStation(stationId) {
@@ -279,24 +282,24 @@ function reserveStation(stationId) {
     createdAt: new Date().toISOString()
   };
   localStorage.setItem('chargeflow:last-allocation', JSON.stringify(allocation));
-  smsStatus.textContent = 'Receipt prepared';
+  smsStatus.textContent = `Ready to send to ${mobileNumber}`;
   modal.classList.add('visible');
   modal.setAttribute('aria-hidden', 'false');
   const receiptMessage = `ChargeFlow receipt\n${station.name}\nETA: ${station.eta} min\nToken: ${tokenOutput.textContent}\nOTP: ${reservationOtp}`;
-  const isMobileDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  if (isMobileDevice) {
-    window.location.href = `sms:${mobileNumber}?body=${encodeURIComponent(receiptMessage)}`;
-    smsStatus.textContent = 'SMS ready - tap Send on your phone';
-  } else if (navigator.clipboard) {
-    navigator.clipboard.writeText(receiptMessage).then(() => {
-      smsStatus.textContent = 'Receipt copied for mobile delivery';
-    }).catch(() => {
-      smsStatus.textContent = `Ready for ${mobileNumber}`;
-    });
-  }
 }
 
-form.addEventListener('submit', (event) => { event.preventDefault(); renderStations(); resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const radiusKm = Number(searchRadius.value);
+  if (!Number.isFinite(radiusKm) || radiusKm < 1 || radiusKm > 200) {
+    searchRadius.reportValidity();
+    return;
+  }
+  searchRadiusSummary.textContent = `${radiusKm} km`;
+  if (currentLocation) await loadLiveNetwork(currentLocation, radiusKm);
+  renderStations();
+  resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 document.querySelector('#change-location').addEventListener('click', locateUser);
 document.querySelector('#refresh-data').addEventListener('click', () => { locateUser(); });
 document.querySelector('#modal-close').addEventListener('click', closeModal);
@@ -304,25 +307,8 @@ document.querySelector('#print-receipt').addEventListener('click', () => window.
 document.querySelector('#send-sms').addEventListener('click', () => {
   const mobileNumber = document.querySelector('#mobile-number').value.trim();
   const message = `ChargeFlow reservation ${tokenOutput.textContent}. OTP: ${reservationOtp}. ${modalTitle.textContent} ETA ${modalEta.textContent}.`;
-  if (navigator.share) {
-    navigator.share({ title: 'ChargeFlow receipt', text: message }).then(() => {
-      smsStatus.textContent = 'Receipt shared to mobile';
-    }).catch(() => {
-      smsStatus.textContent = 'Share cancelled';
-    });
-    return;
-  }
-  const isMobileDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-  if (isMobileDevice) {
-    window.location.href = `sms:${mobileNumber}?body=${encodeURIComponent(message)}`;
-    smsStatus.textContent = 'SMS composer opened';
-    return;
-  }
-  navigator.clipboard.writeText(message).then(() => {
-    smsStatus.textContent = 'Receipt copied. Open this page on your phone to send it by SMS.';
-  }).catch(() => {
-    smsStatus.textContent = 'SMS is unavailable on this computer. Use Print receipt.';
-  });
+  window.location.href = `sms:${mobileNumber}?body=${encodeURIComponent(message)}`;
+  smsStatus.textContent = `SMS composer opened for ${mobileNumber}`;
 });
 document.querySelector('#modal-done').addEventListener('click', () => {
   if (!allocatedStation) return;
