@@ -285,7 +285,6 @@ function reserveStation(stationId) {
   smsStatus.textContent = `Ready to send to ${mobileNumber}`;
   modal.classList.add('visible');
   modal.setAttribute('aria-hidden', 'false');
-  const receiptMessage = `ChargeFlow receipt\n${station.name}\nETA: ${station.eta} min\nToken: ${tokenOutput.textContent}\nOTP: ${reservationOtp}`;
 }
 
 form.addEventListener('submit', async (event) => {
@@ -306,7 +305,7 @@ document.querySelector('#modal-close').addEventListener('click', closeModal);
 document.querySelector('#print-receipt').addEventListener('click', () => window.print());
 document.querySelector('#send-sms').addEventListener('click', () => {
   const mobileNumber = document.querySelector('#mobile-number').value.trim();
-  const message = `ChargeFlow reservation ${tokenOutput.textContent}. OTP: ${reservationOtp}. ${modalTitle.textContent} ETA ${modalEta.textContent}.`;
+  const message = `ChargeFlow receipt\n${modalTitle.textContent}\nETA: ${modalEta.textContent}\nReservation token: ${tokenOutput.textContent}\nOne-time code: ${reservationOtp}`;
   window.location.href = `sms:${mobileNumber}?body=${encodeURIComponent(message)}`;
   smsStatus.textContent = `SMS composer opened for ${mobileNumber}`;
 });

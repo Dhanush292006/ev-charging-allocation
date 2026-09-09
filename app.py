@@ -3,6 +3,7 @@ import math
 import os
 import secrets
 from datetime import datetime
+from urllib.parse import quote
 
 import pandas as pd
 import requests
@@ -564,5 +565,22 @@ if reservation:
         }]
     )
     st.dataframe(ticket, hide_index=True, use_container_width=True)
+    receipt_message = (
+        f"ChargeFlow receipt\n"
+        f"Station: {station['name']}\n"
+        f"ETA: {station['eta']} min\n"
+        f"Reservation token: {reservation['token']}\n"
+        f"One-time code: {reservation['otp']}"
+    )
+    mobile_number = st.session_state["mobile_number"].strip()
+    sms_url = f"sms:{mobile_number}?body={quote(receipt_message)}"
+    whatsapp_number = "".join(character for character in mobile_number if character.isdigit())
+    whatsapp_url = f"https://wa.me/{whatsapp_number}?text={quote(receipt_message)}"
+    delivery_actions = st.columns(2)
+    with delivery_actions[0]:
+        st.link_button("Send receipt by SMS", sms_url, use_container_width=True)
+    with delivery_actions[1]:
+        st.link_button("Send receipt by WhatsApp", whatsapp_url, use_container_width=True)
+    st.caption(f"Receipt prepared for {mobile_number}. Your messaging app will open with the message ready to send.")
     directions = f"https://www.google.com/maps/dir/?api=1&destination={station['lat']},{station['lon']}&travelmode=driving"
     st.link_button("Start navigation", directions, use_container_width=True)
