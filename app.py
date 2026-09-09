@@ -1,14 +1,16 @@
 import hashlib
 import math
+import os
 import secrets
 from datetime import datetime
 
 import pandas as pd
 import requests
 import streamlit as st
+from streamlit_geolocation import streamlit_geolocation
 
 
-SEARCH_RADIUS_KM = 15
+SEARCH_RADIUS_KM = 50
 OPEN_CHARGE_MAP_URL = "https://api.openchargemap.io/v3/poi/"
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 OVERPASS_FALLBACK_URLS = [
@@ -21,6 +23,8 @@ ROUTING_URLS = [
     OSRM_URL,
     "https://routing.openstreetmap.de/routed-car/route/v1/driving",
 ]
+GOOGLE_ROUTES_URL = "https://routes.googleapis.com/directions/v2:computeRoutes"
+GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 EV_MODELS = [
     "Ather 450X",
     "Ather 450S",
@@ -111,6 +115,66 @@ def api_get(url, params=None):
     return response.json()
 
 
+def fetch_location_name(latitude, longitude):
+    response = requests.get(
+        "https://nominatim.openstreetmap.org/reverse",
+        params={
+            "lat": latitude,
+            "lon": longitude,
+            "format": "jsonv2",
+            "zoom": 18,
+            "addressdetails": 1,
+        },
+        headers={"User-Agent": "ChargeFlow EV Allocation/1.0"},
+        timeout=10,
+    )
+    response.raise_for_status()
+    return response.json().get("display_name")
+
+
+def haversine_distance_km(first_latitude, first_longitude, second_latitude, second_longitude):
+    """Return the straight-line distance between two coordinates in kilometres."""
+    earth_radius_km = 6371.0088
+    latitude_delta = math.radians(second_latitude - first_latitude)
+    longitude_delta = math.radians(second_longitude - first_longitude)
+    first_latitude_radians = math.radians(first_latitude)
+    second_latitude_radians = math.radians(second_latitude)
+    haversine = (
+        math.sin(latitude_delta / 2) ** 2
+        + math.cos(first_latitude_radians)
+        * math.cos(second_latitude_radians)
+        * math.sin(longitude_delta / 2) ** 2
+    )
+    return earth_radius_km * 2 * math.atan2(math.sqrt(haversine), math.sqrt(1 - haversine))
+
+
+def fetch_google_maps_route(origin_latitude, origin_longitude, destination_latitude, destination_longitude):
+    """Return Google Maps driving distance (km) and duration (seconds), if configured."""
+    if not GOOGLE_MAPS_API_KEY:
+        return None
+    response = requests.post(
+        GOOGLE_ROUTES_URL,
+        json={
+            "origin": {"location": {"latLng": {"latitude": origin_latitude, "longitude": origin_longitude}}},
+            "destination": {"location": {"latLng": {"latitude": destination_latitude, "longitude": destination_longitude}}},
+            "travelMode": "DRIVE",
+            "routingPreference": "TRAFFIC_AWARE",
+        },
+        headers={
+            "User-Agent": "ChargeFlow EV Allocation/1.0",
+            "X-Goog-Api-Key": GOOGLE_MAPS_API_KEY,
+            "X-Goog-FieldMask": "routes.distanceMeters,routes.duration",
+        },
+        timeout=20,
+    )
+    response.raise_for_status()
+    route = response.json()["routes"][0]
+    duration = str(route["duration"])
+    if not duration.endswith("s"):
+        raise ValueError("Google Maps returned an invalid route duration")
+    return float(route["distanceMeters"]) / 1000, float(duration[:-1])
+
+
 def fetch_photon_stations(latitude, longitude, search_radius_km):
     photon_data = api_get(
         PHOTON_URL,
@@ -128,10 +192,7 @@ def fetch_photon_stations(latitude, longitude, search_radius_km):
         if len(coordinates) != 2:
             continue
         station_lon, station_lat = coordinates
-        if math.hypot(
-            (station_lat - latitude) * 111,
-            (station_lon - longitude) * 111 * math.cos(math.radians(latitude)),
-        ) > search_radius_km:
+        if haversine_distance_km(latitude, longitude, station_lat, station_lon) > search_radius_km:
             continue
         stations.append(
             {
@@ -248,10 +309,22 @@ def fetch_stations(latitude, longitude, search_radius_km):
 
 
 
-def add_road_data(stations, latitude, longitude):
+def add_road_data(stations, latitude, longitude, search_radius_km):
     enriched = []
-    for station in stations[:12]:
+    nearby_stations = sorted(
+        (
+            (station, haversine_distance_km(latitude, longitude, station["lat"], station["lon"]))
+            for station in stations
+        ),
+        key=lambda item: item[1],
+    )
+    for station, gps_distance in nearby_stations:
+        if gps_distance > search_radius_km:
+            break
+        if len(enriched) >= 12:
+            break
         route_found = False
+        route_outside_radius = False
         for routing_url in ROUTING_URLS:
             try:
                 route = api_get(
@@ -260,23 +333,35 @@ def add_road_data(stations, latitude, longitude):
                 if route.get("code") != "Ok":
                     continue
                 route_data = route["routes"][0]
+                road_distance_km = float(route_data["distance"]) / 1000
+                # A driving route cannot be shorter than the direct geographic distance.
+                if not math.isfinite(road_distance_km) or road_distance_km < gps_distance - 0.05:
+                    continue
+                if road_distance_km > search_radius_km:
+                    route_outside_radius = True
+                    continue
                 enriched.append(
                     {
                         **station,
-                        "distance": route_data["distance"] / 1000,
+                        "distance": road_distance_km,
+                        "gps_distance": gps_distance,
                         "eta": max(1, round(route_data["duration"] / 60)),
                     }
                 )
                 route_found = True
                 break
-            except requests.RequestException:
+            except (requests.RequestException, KeyError, IndexError, TypeError, ValueError):
                 continue
-        if not route_found:
-            distance = math.hypot(
-                (station["lat"] - latitude) * 111,
-                (station["lon"] - longitude) * 111 * math.cos(math.radians(latitude)),
+        if not route_found and not route_outside_radius:
+            enriched.append(
+                {
+                    **station,
+                    "distance": gps_distance,
+                    "gps_distance": gps_distance,
+                    "eta": None,
+                    "distance_type": "Straight-line",
+                }
             )
-            enriched.append({**station, "distance": distance, "eta": None, "distance_type": "Straight-line"})
     return enriched
 
 
@@ -335,15 +420,55 @@ with st.container(border=True):
     if vehicle_model == "Other / custom model":
         vehicle_model = st.text_input("Custom EV model", placeholder="Enter make and model")
 
+    location_method = st.radio(
+        "Choose location method",
+        ["Use GPS", "Enter coordinates"],
+        horizontal=True,
+    )
+    if location_method == "Use GPS":
+        gps_location = streamlit_geolocation()
+        gps_latitude = gps_location.get("latitude") if gps_location else None
+        gps_longitude = gps_location.get("longitude") if gps_location else None
+        if gps_latitude is not None and gps_longitude is not None:
+            st.session_state["gps_location"] = (gps_latitude, gps_longitude)
+            try:
+                location_name = fetch_location_name(gps_latitude, gps_longitude)
+            except requests.RequestException:
+                location_name = "Exact GPS coordinates"
+            st.success(
+                f"GPS location detected near {location_name}: latitude {gps_latitude:.6f}, "
+                f"longitude {gps_longitude:.6f}"
+            )
+    saved_location = st.session_state.get("gps_location", (13.0827, 80.2707))
     second_row = st.columns(3)
     with second_row[0]:
         battery_level = st.slider("Current battery", 5, 100, 24, format="%d%%")
     with second_row[1]:
-        latitude = st.number_input("Current latitude", value=13.0827, format="%.5f", help="Default: Chennai")
+        latitude = st.number_input(
+            "Current latitude",
+            value=float(saved_location[0]),
+            format="%.5f",
+            disabled=location_method == "Use GPS",
+            help="Switch to Enter coordinates to choose the location manually.",
+        )
     with second_row[2]:
-        longitude = st.number_input("Current longitude", value=80.2707, format="%.5f", help="Default: Chennai")
+        longitude = st.number_input(
+            "Current longitude",
+            value=float(saved_location[1]),
+            format="%.5f",
+            disabled=location_method == "Use GPS",
+            help="Switch to Enter coordinates to choose the location manually.",
+        )
 
-    search_radius_km = st.slider("Search radius", 5, 50, SEARCH_RADIUS_KM, 5, format="%d km")
+    search_radius_km = int(
+        st.number_input(
+            "Search radius (km)",
+            min_value=1,
+            value=SEARCH_RADIUS_KM,
+            step=1,
+            help="Enter any positive search radius in kilometres.",
+        )
+    )
 
     third_row = st.columns(2)
     with third_row[0]:
@@ -360,7 +485,7 @@ if locate:
         with st.spinner("Loading live station and route data..."):
             try:
                 raw_stations = fetch_stations(latitude, longitude, search_radius_km)
-                stations = add_road_data(raw_stations, latitude, longitude)
+                stations = add_road_data(raw_stations, latitude, longitude, search_radius_km)
                 st.session_state["ranked_stations"] = score_stations(stations, battery_level, arrival_window)
                 st.session_state["location"] = (latitude, longitude)
                 st.session_state["vehicle_id"] = vehicle_id
@@ -392,13 +517,15 @@ else:
             <span class='tag'>{station['type']} · {station['status']} · {station['source']}</span></div>""",
             unsafe_allow_html=True,
         )
-        details = st.columns(5)
+        details = st.columns(7)
         distance_label = f"{station.get('distance_type', 'Road')} distance"
         details[0].metric(distance_label, f"{station['distance']:.1f} km")
-        details[1].metric("Capacity", f"{station['capacity']} connectors" if station["capacity"] else "Not listed")
-        details[2].metric("Travel time", f"{station['eta']} min" if station["eta"] is not None else "Unavailable")
-        details[3].metric("Score", f"{station['score'] * 100:.1f}")
-        if details[4].button("Reserve this" if index == 0 else "Reserve", key=f"reserve-{station['id']}"):
+        details[1].metric("Latitude", f"{station['lat']:.5f}")
+        details[2].metric("Longitude", f"{station['lon']:.5f}")
+        details[3].metric("Capacity", f"{station['capacity']} connectors" if station["capacity"] else "Not listed")
+        details[4].metric("Travel time", f"{station['eta']} min" if station['eta'] is not None else "Unavailable")
+        details[5].metric("Score", f"{station['score'] * 100:.1f}")
+        if details[6].button("Reserve this" if index == 0 else "Reserve", key=f"reserve-{station['id']}"):
             token = reservation_token(st.session_state["vehicle_id"], station["id"])
             otp = f"{secrets.randbelow(900000) + 100000}"
             st.session_state["reservation"] = {"station": station, "token": token, "otp": otp}

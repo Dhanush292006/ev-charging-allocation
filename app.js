@@ -1,4 +1,4 @@
-const SEARCH_RADIUS_METERS = 15000;
+const SEARCH_RADIUS_METERS = 50000;
 let stations = [];
 let currentLocation = null;
 let allocatedStation = null;
@@ -14,6 +14,9 @@ const modalEta = document.querySelector('#modal-eta');
 const tokenOutput = document.querySelector('#reservation-token');
 const locationName = document.querySelector('#location-name');
 const locationStatus = document.querySelector('#location-status');
+const locationCoordinates = document.querySelector('#location-coordinates');
+const manualLatitude = document.querySelector('#manual-latitude');
+const manualLongitude = document.querySelector('#manual-longitude');
 const networkStatus = document.querySelector('#network-status');
 const otpOutput = document.querySelector('#reservation-otp');
 const smsStatus = document.querySelector('#sms-status');
@@ -42,16 +45,31 @@ function scoreStations(batteryLevel) {
   }).sort((a, b) => b.score - a.score);
 }
 
+function gpsDistanceKm(firstLatitude, firstLongitude, secondLatitude, secondLongitude) {
+  const earthRadiusKm = 6371;
+  const toRadians = (value) => value * Math.PI / 180;
+  const latitudeDelta = toRadians(secondLatitude - firstLatitude);
+  const longitudeDelta = toRadians(secondLongitude - firstLongitude);
+  const firstLatitudeRadians = toRadians(firstLatitude);
+  const secondLatitudeRadians = toRadians(secondLatitude);
+  const haversine = Math.sin(latitudeDelta / 2) ** 2
+    + Math.cos(firstLatitudeRadians) * Math.cos(secondLatitudeRadians)
+    * Math.sin(longitudeDelta / 2) ** 2;
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+}
+
 function renderStations() {
   const rankedStations = scoreStations(Number(battery.value));
   if (!rankedStations.length) {
-    stationList.innerHTML = '<div class="empty-results">No charging stations were found within 15 km. Try locating again.</div>';
+    stationList.innerHTML = '<div class="empty-results">No charging stations were found within 50 km. Try locating again.</div>';
     return;
   }
   stationList.innerHTML = rankedStations.map((station, index) => `
     <article class="station-card ${index === 0 ? 'recommended' : ''}">
       <div class="station-name"><span class="station-badge">⚡</span><div><strong>${station.name}${index === 0 ? '<span class="recommended-label">Best match</span>' : ''}</strong><small>${station.type} · ${station.congestion} traffic</small></div></div>
       <div class="station-metric"><span>Road distance</span><strong>${station.distance.toFixed(1)} km</strong></div>
+      <div class="station-metric"><span>Latitude</span><strong>${station.lat.toFixed(5)}</strong></div>
+      <div class="station-metric"><span>Longitude</span><strong>${station.lon.toFixed(5)}</strong></div>
       <div class="station-metric availability"><span>Reported capacity</span><strong>${station.capacity ? `${station.capacity} connectors` : 'Not listed'}</strong></div>
       <div class="station-metric"><span>OSRM travel time</span><strong>${station.eta} min</strong></div>
       <div class="station-metric station-status"><span>Status</span><strong>${station.statusLabel}</strong></div>
@@ -75,7 +93,7 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 12000) {
 }
 
 async function fetchStations(location) {
-  const openChargeMapUrl = `https://api.openchargemap.io/v3/poi/?output=json&latitude=${location.lat}&longitude=${location.lon}&distance=15&distanceunit=KM&maxresults=50&compact=true`;
+  const openChargeMapUrl = `https://api.openchargemap.io/v3/poi/?output=json&latitude=${location.lat}&longitude=${location.lon}&distance=50&distanceunit=KM&maxresults=50&compact=true`;
   try {
     const response = await fetchWithTimeout(openChargeMapUrl);
     if (!response.ok) throw new Error('Open Charge Map unavailable');
@@ -122,16 +140,25 @@ async function fetchStations(location) {
 }
 
 async function addRoadData(foundStations, location) {
-  return Promise.all(foundStations.slice(0, 12).map(async (station) => {
+  const nearbyStations = foundStations
+    .map((station) => ({ ...station, gpsDistance: gpsDistanceKm(location.lat, location.lon, station.lat, station.lon) }))
+    .filter((station) => station.gpsDistance <= SEARCH_RADIUS_METERS / 1000)
+    .sort((first, second) => first.gpsDistance - second.gpsDistance)
+    .slice(0, 12);
+  return Promise.all(nearbyStations.map(async (station) => {
     try {
       const routeResponse = await fetchWithTimeout(`https://router.project-osrm.org/route/v1/driving/${location.lon},${location.lat};${station.lon},${station.lat}?overview=false`);
       const route = await routeResponse.json();
       if (route.code !== 'Ok') throw new Error('No route');
-      return { ...station, distance: route.routes[0].distance / 1000, eta: Math.max(1, Math.round(route.routes[0].duration / 60)) };
+      const roadDistanceKm = route.routes[0].distance / 1000;
+      if (!Number.isFinite(roadDistanceKm) || roadDistanceKm < station.gpsDistance - 0.05 || roadDistanceKm > SEARCH_RADIUS_METERS / 1000) {
+        return null;
+      }
+      return { ...station, distance: roadDistanceKm, eta: Math.max(1, Math.round(route.routes[0].duration / 60)) };
     } catch {
-      return { ...station, distance: 0, eta: 0 };
+      return null;
     }
-  })).then((items) => items.filter((station) => station.eta > 0));
+  })).then((items) => items.filter(Boolean));
 }
 
 async function loadLiveNetwork(location) {
@@ -145,7 +172,7 @@ async function loadLiveNetwork(location) {
     stations.sort((a, b) => a.distance - b.distance);
     document.querySelector('#station-count').textContent = stations.length;
     document.querySelector('#charger-data-count').textContent = stations.filter((station) => station.capacity).length;
-    document.querySelector('#network-area').textContent = 'within 15 km of you';
+    document.querySelector('#network-area').textContent = 'within 50 km of you';
     networkStatus.textContent = `${stations[0]?.source || 'Live map'} · updated ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     renderStations();
   } catch (error) {
@@ -157,6 +184,20 @@ async function loadLiveNetwork(location) {
   }
 }
 
+async function fetchLocationName(latitude, longitude) {
+  const params = new URLSearchParams({
+    lat: latitude,
+    lon: longitude,
+    format: 'jsonv2',
+    zoom: '18',
+    addressdetails: '1'
+  });
+  const response = await fetchWithTimeout(`https://nominatim.openstreetmap.org/reverse?${params}`);
+  if (!response.ok) throw new Error('Reverse geocoding unavailable');
+  const data = await response.json();
+  return data.display_name || 'Current device location';
+}
+
 function locateUser() {
   if (!navigator.geolocation) {
     locationName.textContent = 'Geolocation unavailable';
@@ -164,17 +205,50 @@ function locateUser() {
     return;
   }
   locationName.textContent = 'Locating your device...';
-  locationStatus.textContent = 'Waiting for GPS permission';
+  locationStatus.textContent = 'Requesting your device GPS location...';
   navigator.geolocation.getCurrentPosition(async (position) => {
     const location = { lat: position.coords.latitude, lon: position.coords.longitude, label: 'Current device location' };
+    const accuracy = Math.round(position.coords.accuracy);
+    if (accuracy > 500) {
+      locationName.textContent = 'GPS accuracy too low';
+      locationStatus.textContent = `Browser accuracy is ±${accuracy} m. Paste coordinates below or use a phone GPS.`;
+      networkStatus.textContent = 'Search paused because location is inaccurate';
+      return;
+    }
+    try {
+      location.label = await fetchLocationName(location.lat, location.lon);
+    } catch (error) {
+      console.warn('Exact address lookup failed; using GPS coordinates', error);
+    }
+    locationCoordinates.textContent = `Latitude ${location.lat.toFixed(6)} · Longitude ${location.lon.toFixed(6)}`;
+    manualLatitude.value = location.lat.toFixed(6);
+    manualLongitude.value = location.lon.toFixed(6);
+    locationStatus.textContent = `Fresh GPS fix · accuracy ±${accuracy} m`;
     await loadLiveNetwork(location);
-  }, () => {
-    locationName.textContent = 'Location permission denied';
-    locationStatus.textContent = 'Allow GPS access, then press Locate';
+  }, (error) => {
+    locationName.textContent = error.code === 1 ? 'Location permission denied' : 'Location unavailable';
+    locationStatus.textContent = error.code === 1
+      ? 'Allow location access in the browser, then press Use my location'
+      : 'Open this app on localhost or HTTPS and enable device location';
     networkStatus.textContent = 'Waiting for a real device location';
-    stationList.innerHTML = '<div class="empty-results">Stations are hidden until you allow location access. Click Locate after enabling GPS in your browser.</div>';
-  }, { enableHighAccuracy: true, timeout: 10000 });
+    stationList.innerHTML = '<div class="empty-results">Enable browser location access, then press Use my location to search nearby stations.</div>';
+  }, { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 });
 }
+
+document.querySelector('#use-coordinates').addEventListener('click', async () => {
+  const lat = Number(manualLatitude.value);
+  const lon = Number(manualLongitude.value);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon) || lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+    manualLatitude.reportValidity();
+    manualLongitude.reportValidity();
+    return;
+  }
+  const location = { lat, lon, label: 'Entered coordinates' };
+  locationName.textContent = 'Entered location';
+  locationCoordinates.textContent = `Latitude ${lat.toFixed(6)} · Longitude ${lon.toFixed(6)}`;
+  locationStatus.textContent = 'Using entered coordinates';
+  await loadLiveNetwork(location);
+});
 
 function reserveStation(stationId) {
   const station = stations.find((item) => item.id === stationId);
@@ -270,4 +344,3 @@ document.querySelectorAll('.nav-item').forEach((item) => {
   });
 });
 
-locateUser();
