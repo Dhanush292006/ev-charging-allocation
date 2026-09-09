@@ -425,6 +425,8 @@ with st.container(border=True):
         ["Use GPS", "Enter coordinates"],
         horizontal=True,
     )
+    gps_latitude = None
+    gps_longitude = None
     if location_method == "Use GPS":
         gps_location = streamlit_geolocation()
         gps_latitude = gps_location.get("latitude") if gps_location else None
@@ -439,26 +441,34 @@ with st.container(border=True):
                 f"GPS location detected near {location_name}: latitude {gps_latitude:.6f}, "
                 f"longitude {gps_longitude:.6f}"
             )
-    saved_location = st.session_state.get("gps_location", (13.0827, 80.2707))
     second_row = st.columns(3)
     with second_row[0]:
         battery_level = st.slider("Current battery", 5, 100, 24, format="%d%%")
-    with second_row[1]:
-        latitude = st.number_input(
-            "Current latitude",
-            value=float(saved_location[0]),
-            format="%.5f",
-            disabled=location_method == "Use GPS",
-            help="Switch to Enter coordinates to choose the location manually.",
-        )
-    with second_row[2]:
-        longitude = st.number_input(
-            "Current longitude",
-            value=float(saved_location[1]),
-            format="%.5f",
-            disabled=location_method == "Use GPS",
-            help="Switch to Enter coordinates to choose the location manually.",
-        )
+    if location_method == "Use GPS":
+        latitude, longitude = gps_latitude, gps_longitude
+        with second_row[1]:
+            st.metric("GPS latitude", f"{latitude:.6f}" if latitude is not None else "Waiting")
+        with second_row[2]:
+            st.metric("GPS longitude", f"{longitude:.6f}" if longitude is not None else "Waiting")
+    else:
+        manual_location = st.session_state.get("manual_location", (13.0827, 80.2707))
+        with second_row[1]:
+            latitude = st.number_input(
+                "Current latitude",
+                value=float(manual_location[0]),
+                format="%.6f",
+                key="manual_latitude",
+                help="Enter the customer location latitude.",
+            )
+        with second_row[2]:
+            longitude = st.number_input(
+                "Current longitude",
+                value=float(manual_location[1]),
+                format="%.6f",
+                key="manual_longitude",
+                help="Enter the customer location longitude.",
+            )
+        st.session_state["manual_location"] = (latitude, longitude)
 
     search_radius_km = int(
         st.number_input(
@@ -481,6 +491,8 @@ with st.container(border=True):
 if locate:
     if len("".join(character for character in mobile_number if character.isdigit())) < 10:
         st.error("Enter a valid mobile number with at least 10 digits.")
+    elif latitude is None or longitude is None:
+        st.error("Wait for GPS coordinates or choose Enter coordinates.")
     else:
         with st.spinner("Loading live station and route data..."):
             try:
